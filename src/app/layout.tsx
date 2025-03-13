@@ -3,6 +3,8 @@ import "./globals.css";
 import type { Metadata } from "next";
 import { Scope_One } from "next/font/google";
 
+import { ChangeContentProvider } from "@/contexts/change-content-context";
+
 const scopeOne = Scope_One({
   subsets: ["latin"],
   weight: ["400"],
@@ -20,7 +22,9 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={`${scopeOne.className} antialiased`}>{children}</body>
+      <body className={`${scopeOne.className} antialiased`}>
+        <ChangeContentProvider>{children}</ChangeContentProvider>
+      </body>
     </html>
   );
 }
