@@ -1,5 +1,5 @@
 "use client";
-import { createContext, useState } from "react";
+import { createContext, useContext, useState } from "react";
 
 export enum ContentType {
   Register = "register",
@@ -30,4 +30,15 @@ export const ChangeContentProvider = ({
       {children}
     </ChangeContentContext.Provider>
   );
+};
+
+export const useChangeContent = () => {
+  const context = useContext(ChangeContentContext);
+
+  if (!context)
+    throw new Error(
+      "useChangeContent must be wrapped by a ChangeContentProvider"
+    );
+
+  return context;
 };
