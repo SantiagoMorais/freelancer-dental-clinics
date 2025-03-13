@@ -4,6 +4,7 @@ import type { Metadata } from "next";
 import { Scope_One } from "next/font/google";
 
 import { ChangeContentProvider } from "@/contexts/change-content-context";
+import { ThemeTogglerProvider } from "@/contexts/theme-toggler-content";
 
 const scopeOne = Scope_One({
   subsets: ["latin"],
@@ -23,7 +24,9 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={`${scopeOne.className} antialiased`}>
-        <ChangeContentProvider>{children}</ChangeContentProvider>
+        <ThemeTogglerProvider>
+          <ChangeContentProvider>{children}</ChangeContentProvider>
+        </ThemeTogglerProvider>
       </body>
     </html>
   );
