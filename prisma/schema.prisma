@@ -1,0 +1,68 @@
+datasource db {
+    provider = "postgresql"
+    url      = env("DATABASE_URL")
+}
+
+generator client {
+    provider = "prisma-client-js"
+}
+
+model Client {
+    id              String          @id @default(cuid())
+    companyName     String
+    address         String          @unique
+    phone           Int
+    openingHours    String
+    socialMedia     String
+    hasAnWebSite       Boolean         @default(false)
+    workingProgress WorkingProgress
+    lastContactedAt DateTime?
+    notes           String?
+
+    createdAt      DateTime        @default(now())
+    updatedAt      DateTime        @default(now())
+    clientProjects ClientProject[]
+
+    @@map("clients")
+}
+
+model ClientProject {
+    id               String          @id @default(cuid())
+    clientId         String
+    startedAt        DateTime
+    finishedAt       DateTime?
+    servicePrice     Float
+    serviceCategory  ServiceCategory
+    paymentStatus    PaymentStatus   @default(PENDING)
+    rating           Int?
+    review           String?
+    websiteCreatedAt DateTime?
+
+    createdAt DateTime @default(now())
+    updatedAt DateTime @default(now())
+    Client    Client   @relation(fields: [clientId], references: [id])
+
+    @@map("clientProjects")
+}
+
+enum WorkingProgress {
+    IN_PROGRESS
+    REFUSED
+    AVAILABLE
+    FINISHED
+}
+
+enum ServiceCategory {
+    INSTITUTIONAL
+    ECOMMERCE
+    SCHEDULING
+    BLOG
+    LANDING_PAGE
+    OTHERS
+}
+
+enum PaymentStatus {
+    PENDING
+    PAID
+    PARTIAL
+}
