@@ -11,10 +11,10 @@ model Client {
     id              String          @id @default(cuid())
     companyName     String
     address         String          @unique
-    phone           Int
+    phone           String
     openingHours    String
-    socialMedia     String
-    hasAnWebSite       Boolean         @default(false)
+    socialMedia     String?
+    hasAnWebSite    Boolean         @default(false)
     workingProgress WorkingProgress
     lastContactedAt DateTime?
     notes           String?
