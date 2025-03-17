@@ -9,7 +9,11 @@ import { PatternFormat } from "react-number-format";
 import { toast } from "sonner";
 
 import { registerClient } from "@/actions/register-client";
-import { AlertDialog, AlertDialogContent } from "@/components/ui/alert-dialog";
+import {
+  AlertDialog,
+  AlertDialogContent,
+  AlertDialogDescription,
+} from "@/components/ui/alert-dialog";
 import { Button } from "@/components/ui/button";
 import {
   Form,
@@ -60,13 +64,28 @@ export const RegisterClient = () => {
         ...(data.socialMedia && { socialMedia: data.socialMedia }),
         ...(data.notes && { notes: data.notes }),
       });
-      toast("Cliente registrado com sucesso! Veja na lista de novos clientes.");
+      toast(
+        "Cliente registrado com sucesso! Veja na lista de novos clientes.",
+        { description: "" }
+      );
     } catch (error) {
       console.error("Error registering a new client:", error);
-      toast(`Erro: ${error}`);
+      toast(`Erro: ${error}`, { description: "" });
     } finally {
       setIsLoading(false);
     }
+  };
+
+  const handleGetZipCodeValue = async (
+    e: React.ChangeEvent<HTMLInputElement>
+  ) => {
+    const value = e.target.value;
+    const formatedValue = value.replace(/-/g, "").trim();
+
+    if (formatedValue.length === 8) {
+      processZipCode(formatedValue);
+    }
+    return;
   };
 
   const processZipCode = async (zipCode: string) => {
@@ -80,7 +99,10 @@ export const RegisterClient = () => {
     } catch (error) {
       console.error("Erro ao buscar endereço:", error);
       toast(
-        "CEP inválido. Tente novamente ou preencha o endereço manualmente."
+        "CEP inválido. Tente novamente ou preencha o endereço manualmente.",
+        {
+          description: "",
+        }
       );
     } finally {
       setProcessingZipCode(false);
@@ -91,12 +113,13 @@ export const RegisterClient = () => {
     <Form {...form}>
       {processingZipCode && (
         <AlertDialog open>
-          <AlertDialogTitle>Carregando Endereço</AlertDialogTitle>
           <AlertDialogContent className="flex flex-col items-center gap-4">
-            <h2 className="text-2xl font-bold uppercase">
+            <AlertDialogTitle className="text-2xl font-bold uppercase">
               Carregando Endereço
-            </h2>
-            <Loader2 className="size-16 animate-spin" />
+            </AlertDialogTitle>
+            <AlertDialogDescription>
+              <Loader2 className="size-16 animate-spin" />
+            </AlertDialogDescription>
           </AlertDialogContent>
         </AlertDialog>
       )}
@@ -112,12 +135,12 @@ export const RegisterClient = () => {
             render={({ field }) => (
               <FormItem>
                 <FormLabel className="text-lg font-semibold">
-                  Client/Company Name{" "}
+                  Nome do cliente/empresa{" "}
                   <span className="text-destructive">*</span>
                 </FormLabel>
                 <FormControl>
                   <Input
-                    placeholder="Client or Company name"
+                    placeholder="Nome do cliente ou empresa"
                     {...field}
                     className="border-primary font-semibold"
                   />
@@ -132,14 +155,14 @@ export const RegisterClient = () => {
             render={({ field }) => (
               <FormItem>
                 <FormLabel className="text-lg font-semibold">
-                  Phone Number <span className="text-destructive">*</span>
+                  Telefone <span className="text-destructive">*</span>
                 </FormLabel>
                 <FormControl>
                   <PatternFormat
                     className="border-primary font-semibold"
                     format="(##) # ####-####"
                     customInput={Input}
-                    placeholder="Phone number"
+                    placeholder="Telefone"
                     {...field}
                   />
                 </FormControl>
@@ -160,9 +183,9 @@ export const RegisterClient = () => {
                     className="border-primary font-semibold"
                     format="#####-###"
                     customInput={Input}
-                    placeholder="Phone number"
+                    placeholder="CEP"
                     {...field}
-                    onBlur={async (e) => processZipCode(e.target.value)}
+                    onBlur={async (e) => handleGetZipCodeValue(e)}
                   />
                 </FormControl>
                 <FormMessage />
