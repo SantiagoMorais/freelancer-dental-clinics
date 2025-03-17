@@ -3,7 +3,6 @@ import { ScrollArea } from "@/components/ui/scroll-area";
 import {
   Sheet,
   SheetContent,
-  SheetDescription,
   SheetHeader,
   SheetTitle,
   SheetTrigger,
@@ -22,9 +21,7 @@ export const RegisterClientSheet = () => {
           <SheetTitle className="text-2xl uppercase">Registrar</SheetTitle>
         </SheetHeader>
         <ScrollArea className="size-full border-t px-3 py-4 pb-24">
-          <SheetDescription>
-            <RegisterClientForm />
-          </SheetDescription>
+          <RegisterClientForm />
         </ScrollArea>
       </SheetContent>
     </Sheet>

@@ -16,7 +16,7 @@ export const formRegisterClientSchema = z.object({
   city: z.string().min(2, { message: "Digite um valor válido" }),
   state: z.string().length(2, { message: "Digite somente a UF. Ex: MG" }),
   addressNumber: z.string().min(1, { message: "Escolha um valor válido" }),
-  complement: z.string().optional(),
+  complement: z.coerce.string().optional(),
   phone: z.coerce.string().refine(
     (phoneNumber) => {
       return /^\(\d{2}\)\s9\s\d{4}-\d{4}$/.test(phoneNumber);
@@ -26,9 +26,9 @@ export const formRegisterClientSchema = z.object({
     }
   ),
   openingHours: z.string().min(1, { message: "Campo obrigatório" }),
-  socialMedia: z.string().optional(),
+  socialMedia: z.coerce.string().optional(),
   hasAnWebSite: z.boolean().default(false),
-  notes: z.string().optional(),
+  notes: z.coerce.string().optional(),
 });
 
 export type TFormRegisterClientSchema = z.infer<

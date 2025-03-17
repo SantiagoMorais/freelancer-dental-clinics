@@ -47,6 +47,9 @@ export const RegisterClientForm = () => {
       state: "",
       city: "",
       openingHours: "",
+      complement: "",
+      notes: "",
+      socialMedia: "",
     },
   });
 
@@ -240,6 +243,8 @@ export const RegisterClientForm = () => {
                 </FormLabel>
                 <FormControl>
                   <Input
+                    type="number"
+                    min={1}
                     placeholder="Número"
                     {...field}
                     className="border-primary font-semibold"
