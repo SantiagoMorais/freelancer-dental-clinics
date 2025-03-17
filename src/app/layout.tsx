@@ -3,7 +3,6 @@ import "./globals.css";
 import type { Metadata } from "next";
 import { Montserrat } from "next/font/google";
 
-import { ChangeContentProvider } from "@/contexts/change-content-context";
 import { ThemeTogglerProvider } from "@/contexts/theme-toggler-content";
 
 const montserrat = Montserrat({
@@ -24,9 +23,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={`${montserrat.className} antialiased`}>
-        <ThemeTogglerProvider>
-          <ChangeContentProvider>{children}</ChangeContentProvider>
-        </ThemeTogglerProvider>
+        <ThemeTogglerProvider>{children}</ThemeTogglerProvider>
       </body>
     </html>
   );
