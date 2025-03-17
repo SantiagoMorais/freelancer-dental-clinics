@@ -295,7 +295,7 @@ export const RegisterClient = () => {
                 </FormLabel>
                 <FormControl>
                   <Switch
-                    className="scale-150"
+                    className="scale-150 cursor-pointer"
                     checked={field.value}
                     onCheckedChange={field.onChange}
                   />

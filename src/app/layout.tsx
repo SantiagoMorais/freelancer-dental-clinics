@@ -1,14 +1,14 @@
 import "./globals.css";
 
 import type { Metadata } from "next";
-import { Scope_One } from "next/font/google";
+import { Montserrat } from "next/font/google";
 
 import { ChangeContentProvider } from "@/contexts/change-content-context";
 import { ThemeTogglerProvider } from "@/contexts/theme-toggler-content";
 
-const scopeOne = Scope_One({
+const montserrat = Montserrat({
   subsets: ["latin"],
-  weight: ["400"],
+  weight: ["100", "200", "300", "400", "500", "600", "700", "800", "900"],
 });
 
 export const metadata: Metadata = {
@@ -23,7 +23,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={`${scopeOne.className} antialiased`}>
+      <body className={`${montserrat.className} antialiased`}>
         <ThemeTogglerProvider>
           <ChangeContentProvider>{children}</ChangeContentProvider>
         </ThemeTogglerProvider>
