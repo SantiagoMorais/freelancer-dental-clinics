@@ -35,6 +35,7 @@ export const RegisterClientForm = () => {
 
   const onSubmit = async (data: TFormRegisterClientSchema) => {
     await registerClientOnSubmitForm({ data, setIsLoading });
+    form.reset();
   };
 
   return (

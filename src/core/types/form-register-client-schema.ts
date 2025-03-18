@@ -19,9 +19,11 @@ export const formRegisterClientSchema = z.object({
   complement: z.coerce.string().optional(),
   mobilePhoneNumber: z.coerce
     .string()
+    .transform((value) => (value === "" ? null : value))
     .refine(
-      (phoneNumber) => {
-        return /^\(\d{2}\)\s9\s\d{4}-\d{4}$/.test(phoneNumber);
+      (mobilePhoneNumber) => {
+        if (!mobilePhoneNumber) return true;
+        return /^\(\d{2}\)\s9\s\d{4}-\d{4}$/.test(mobilePhoneNumber);
       },
       {
         message: "Siga o padrão: (99) 9 9999-9999",
@@ -30,8 +32,10 @@ export const formRegisterClientSchema = z.object({
     .optional(),
   phoneNumber: z.coerce
     .string()
+    .transform((value) => (value === "" ? null : value))
     .refine(
       (phoneNumber) => {
+        if (!phoneNumber) return true;
         return /^\(\d{2}\)\s?\d{4}-\d{4}$/.test(phoneNumber);
       },
       {
