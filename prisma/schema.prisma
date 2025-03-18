@@ -8,16 +8,17 @@ generator client {
 }
 
 model Client {
-    id              String          @id @default(cuid())
-    companyName     String
-    address         String          @unique
-    phone           String
-    openingHours    String
-    socialMedia     String?
-    hasAnWebSite    Boolean         @default(false)
-    workingProgress WorkingProgress
-    lastContactedAt DateTime?
-    notes           String?
+    id                String          @id @default(cuid())
+    companyName       String
+    address           String          @unique
+    mobilePhoneNumber String?
+    phoneNumber       String?
+    openingHours      String
+    socialMedia       String?
+    hasAnWebSite      Boolean         @default(false)
+    workingProgress   WorkingProgress
+    lastContactedAt   DateTime?
+    notes             String?
 
     createdAt      DateTime        @default(now())
     updatedAt      DateTime        @default(now())

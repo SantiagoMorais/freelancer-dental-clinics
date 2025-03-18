@@ -8,14 +8,28 @@ export const registerClientSchema = z.object({
       message: "O nome deve ter no máximo 100 caracteres",
     }),
   address: z.string(),
-  phone: z.coerce.string().refine(
-    (phoneNumber) => {
-      return /^\(\d{2}\)\s9\s\d{4}-\d{4}$/.test(phoneNumber);
-    },
-    {
-      message: "Siga o padrão: (DDD) 9 9999-9999",
-    }
-  ),
+  mobilePhoneNumber: z.coerce
+    .string()
+    .refine(
+      (phoneNumber) => {
+        return /^\(\d{2}\)\s9\s\d{4}-\d{4}$/.test(phoneNumber);
+      },
+      {
+        message: "Siga o padrão: (99) 9 9999-9999",
+      }
+    )
+    .optional(),
+  phoneNumber: z.coerce
+    .string()
+    .refine(
+      (phoneNumber) => {
+        return /^\d{2}\s\d{4}-\d{4}$/.test(phoneNumber);
+      },
+      {
+        message: "Siga o padrão: (99) 9999-9999",
+      }
+    )
+    .optional(),
   openingHours: z.string().min(1, { message: "Campo obrigatório" }),
   socialMedia: z.string().optional(),
   hasAnWebSite: z.boolean().default(false),

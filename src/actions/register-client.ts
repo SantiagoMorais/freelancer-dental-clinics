@@ -15,9 +15,12 @@ export const registerClient = async (data: TRegisterClientSchema) => {
       address: data.address,
       companyName: data.companyName,
       openingHours: data.openingHours,
-      phone: data.phone,
       workingProgress: "AVAILABLE",
       hasAnWebSite: data.hasAnWebSite,
+      mobilePhoneNumber: data.mobilePhoneNumber || null,
+      phoneNumber: data.phoneNumber || null,
+      socialMedia: data.socialMedia || null,
+      notes: data.notes || null,
     },
   });
 };

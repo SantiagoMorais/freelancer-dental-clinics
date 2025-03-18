@@ -17,14 +17,28 @@ export const formRegisterClientSchema = z.object({
   state: z.string().length(2, { message: "Digite somente a UF. Ex: MG" }),
   addressNumber: z.string().min(1, { message: "Escolha um valor válido" }),
   complement: z.coerce.string().optional(),
-  phone: z.coerce.string().refine(
-    (phoneNumber) => {
-      return /^\(\d{2}\)\s9\s\d{4}-\d{4}$/.test(phoneNumber);
-    },
-    {
-      message: "Siga o padrão: (DDD) 9 9999-9999",
-    }
-  ),
+  mobilePhoneNumber: z.coerce
+    .string()
+    .refine(
+      (phoneNumber) => {
+        return /^\(\d{2}\)\s9\s\d{4}-\d{4}$/.test(phoneNumber);
+      },
+      {
+        message: "Siga o padrão: (99) 9 9999-9999",
+      }
+    )
+    .optional(),
+  phoneNumber: z.coerce
+    .string()
+    .refine(
+      (phoneNumber) => {
+        return /^\(\d{2}\)\s?\d{4}-\d{4}$/.test(phoneNumber);
+      },
+      {
+        message: "Siga o padrão: (99) 9999-9999",
+      }
+    )
+    .optional(),
   openingHours: z.string().min(1, { message: "Campo obrigatório" }),
   socialMedia: z.coerce.string().optional(),
   hasAnWebSite: z.boolean().default(false),
