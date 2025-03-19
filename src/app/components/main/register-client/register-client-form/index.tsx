@@ -2,6 +2,7 @@
 
 import { zodResolver } from "@hookform/resolvers/zod";
 import { AlertDialogTitle } from "@radix-ui/react-alert-dialog";
+import { useQueryClient } from "@tanstack/react-query";
 import { Loader2 } from "lucide-react";
 import { useState } from "react";
 import { useForm } from "react-hook-form";
@@ -24,6 +25,7 @@ import { useFormDefaultValues } from "@/utils/use-form-default-values";
 import { FormFields } from "./form-fields";
 
 export const RegisterClientForm = () => {
+  const queryClient = useQueryClient();
   const [isLoading, setIsLoading] = useState(false);
   const [processingZipCode, setProcessingZipCode] = useState(false);
 
@@ -36,6 +38,7 @@ export const RegisterClientForm = () => {
   const onSubmit = async (data: TFormRegisterClientSchema) => {
     await registerClientOnSubmitForm({ data, setIsLoading });
     form.reset();
+    queryClient.invalidateQueries({ queryKey: ["clients"] });
   };
 
   return (

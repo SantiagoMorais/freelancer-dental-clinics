@@ -1,11 +1,23 @@
+"use client";
+
+import { Client } from "@prisma/client";
+import { useQuery } from "@tanstack/react-query";
+
 import { listClients } from "@/actions/list-clients";
 
 import { ClientCard } from "./client-card";
 
-export const ListClient = async () => {
-  const clients = await listClients();
+export const ListClient = () => {
+  const { data } = useQuery<Client[]>({
+    queryKey: ["clients"],
+    queryFn: listClients,
+    staleTime: 1000 * 60, // 60 seconds
+  });
+
+  if (!data) return null;
+
   const content = () => {
-    if (!clients.length)
+    if (!data.length)
       return (
         <p className="text-muted-foreground text-center text-lg">
           Nenhum cliente registrado
@@ -13,7 +25,7 @@ export const ListClient = async () => {
       );
     return (
       <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
-        {clients.map((client) => (
+        {data.map((client) => (
           <ClientCard client={client} key={client.id} />
         ))}
       </div>
