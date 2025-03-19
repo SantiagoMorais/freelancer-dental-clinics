@@ -26,6 +26,10 @@ import { FormFields } from "./form-fields";
 
 export const RegisterClientForm = () => {
   const queryClient = useQueryClient();
+  const [buttonAction, setButtonAction] = useState<{
+    text: string;
+    disabled: boolean;
+  }>({ text: "Registrar cliente", disabled: false });
   const [isLoading, setIsLoading] = useState(false);
   const [processingZipCode, setProcessingZipCode] = useState(false);
 
@@ -35,7 +39,17 @@ export const RegisterClientForm = () => {
     defaultValues: useFormDefaultValues,
   });
 
+  const onError = () => {
+    setButtonAction({ text: "Revise os campos", disabled: true });
+
+    setTimeout(() => {
+      setButtonAction({ text: "Registrar cliente", disabled: false });
+    }, 3000); // Volta ao normal depois de 3 segundos
+  };
+
   const onSubmit = async (data: TFormRegisterClientSchema) => {
+    console.log("caiu aqui");
+
     await registerClientOnSubmitForm({ data, setIsLoading });
     form.reset();
     queryClient.invalidateQueries({ queryKey: ["clients"] });
@@ -57,7 +71,7 @@ export const RegisterClientForm = () => {
       )}
       <Toaster />
       <form
-        onSubmit={form.handleSubmit(onSubmit)}
+        onSubmit={form.handleSubmit(onSubmit, onError)}
         className="flex flex-col items-center gap-8 px-1"
       >
         <FormFields form={form} setProcessingZipCode={setProcessingZipCode} />
@@ -65,11 +79,11 @@ export const RegisterClientForm = () => {
           type="submit"
           variant="destructive"
           className="w-full text-xl font-semibold md:w-fit"
-          disabled={isLoading}
+          disabled={isLoading || buttonAction.disabled}
         >
           <Loader2 className={`animate-spin ${!isLoading && "hidden"}`} />
           <span className="md:px-3">
-            {isLoading ? "Processando..." : "Registrar cliente"}
+            {isLoading ? "Processando..." : buttonAction.text}
           </span>
         </Button>
       </form>

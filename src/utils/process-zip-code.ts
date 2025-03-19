@@ -24,9 +24,12 @@ export const processZipCode = async ({
     form.setValue("state", address.uf);
   } catch (error) {
     console.error("Erro ao buscar endereço:", error);
-    toast("CEP inválido. Tente novamente ou preencha o endereço manualmente.", {
-      description: "",
-    });
+    toast.error(
+      "CEP inválido. Tente novamente ou preencha o endereço manualmente.",
+      {
+        description: "",
+      }
+    );
   } finally {
     setProcessingZipCode(false);
   }

@@ -28,12 +28,12 @@ export const registerClientOnSubmitForm = async ({
         phoneNumber: data.phoneNumber,
       }),
     });
-    toast("Cliente registrado com sucesso! Veja na lista de novos clientes.", {
-      description: "",
-    });
+    toast.success(
+      "Cliente registrado com sucesso! Veja na lista de novos clientes."
+    );
   } catch (error) {
     console.error("Error registering a new client:", error);
-    toast(`Erro: ${error}`, { description: "" });
+    toast.error(`Erro: ${error}`, { description: "" });
   } finally {
     setIsLoading(false);
   }
