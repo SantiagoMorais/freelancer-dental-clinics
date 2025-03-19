@@ -69,7 +69,7 @@ export const RegisterClientForm = () => {
           </AlertDialogContent>
         </AlertDialog>
       )}
-      <Toaster />
+      <Toaster position="bottom-left" />
       <form
         onSubmit={form.handleSubmit(onSubmit, onError)}
         className="flex flex-col items-center gap-8 px-1"
