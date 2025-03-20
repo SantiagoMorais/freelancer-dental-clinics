@@ -10,6 +10,7 @@ export const searchByName = async (name: string): Promise<Client[]> => {
     where: {
       companyName: {
         contains: name,
+        mode: "insensitive",
       },
     },
   });

@@ -14,7 +14,7 @@ export const RegisterClientSheet = () => {
   return (
     <Sheet>
       <SheetTrigger asChild>
-        <Button variant="ghost">Registrar Cliente</Button>
+        <Button variant="outline">Registrar Cliente</Button>
       </SheetTrigger>
       <SheetContent className="gap-0">
         <SheetHeader>

@@ -1,6 +1,7 @@
 import { Client } from "@prisma/client";
-import { useQuery } from "@tanstack/react-query";
+import { useQuery, useQueryClient } from "@tanstack/react-query";
 import { Undo2 } from "lucide-react";
+import { notFound } from "next/navigation";
 import { useEffect, useState } from "react";
 
 import { searchByName } from "@/actions/search-by-name";
@@ -14,20 +15,13 @@ export const SearchClientsByNameList = () => {
   const { clientName, setClientName, setIsLoading } = useSearchClientsByName();
 
   const [cursor, setCursor] = useState<string | undefined>(undefined);
-  const [clients, setClients] = useState<Client[]>([]);
+  const queryClient = useQueryClient();
 
   const { data, isFetching } = useQuery<Client[]>({
     queryKey: ["searchClients", cursor, clientName],
-    queryFn: () => {
-      if (!clientName) return Promise.resolve([]);
-      return searchByName(clientName);
-    },
+    queryFn: () => searchByName(clientName),
     staleTime: 1000 * 60, // 60 seconds
   });
-
-  useEffect(() => {
-    if (data) setClients((prev) => [...prev, ...data]);
-  }, [data]);
 
   useEffect(() => {
     setIsLoading(isFetching);
@@ -42,7 +36,11 @@ export const SearchClientsByNameList = () => {
 
   const handleReturn = () => {
     setClientName("");
+    queryClient.invalidateQueries({ queryKey: ["clients"] });
+    queryClient.invalidateQueries({ queryKey: ["searchClients"] });
   };
+
+  if (!data) return;
 
   return (
     <section className="size-full max-w-(--breakpoint-2xl)">
@@ -51,14 +49,14 @@ export const SearchClientsByNameList = () => {
           Retornar <Undo2 />
         </Button>
       )}
-      {!clients.length && !isFetching ? (
+      {!data.length && !isFetching ? (
         <p className="text-muted-foreground text-center text-lg">
           Nenhum registro compatível com {`"${clientName}"`}
         </p>
       ) : (
         <>
           <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
-            {clients.map((client) => (
+            {data.map((client) => (
               <ClientCard client={client} key={client.id} />
             ))}
           </div>
