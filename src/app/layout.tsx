@@ -3,6 +3,7 @@ import "./globals.css";
 import type { Metadata } from "next";
 import { Montserrat } from "next/font/google";
 
+import { ClientsProvider } from "@/contexts/clients-context";
 import { SearchClientsByNameProvider } from "@/contexts/search-clients-by-name-context";
 import { ThemeTogglerProvider } from "@/contexts/theme-toggler-content";
 
@@ -27,9 +28,11 @@ export default function RootLayout({
     <html lang="en">
       <body className={`${montserrat.className} antialiased`}>
         <Providers>
-          <SearchClientsByNameProvider>
-            <ThemeTogglerProvider>{children}</ThemeTogglerProvider>
-          </SearchClientsByNameProvider>
+          <ClientsProvider>
+            <SearchClientsByNameProvider>
+              <ThemeTogglerProvider>{children}</ThemeTogglerProvider>
+            </SearchClientsByNameProvider>
+          </ClientsProvider>
         </Providers>
       </body>
     </html>

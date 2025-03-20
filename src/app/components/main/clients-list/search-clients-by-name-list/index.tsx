@@ -1,7 +1,7 @@
+"use client";
 import { Client } from "@prisma/client";
 import { useQuery, useQueryClient } from "@tanstack/react-query";
 import { Undo2 } from "lucide-react";
-import { notFound } from "next/navigation";
 import { useEffect, useState } from "react";
 
 import { searchByName } from "@/actions/search-by-name";
@@ -43,29 +43,28 @@ export const SearchClientsByNameList = () => {
   if (!data) return;
 
   return (
-    <section className="size-full max-w-(--breakpoint-2xl)">
+    <section className="flex size-full max-w-(--breakpoint-2xl) flex-col items-center justify-center gap-4">
       {clientName?.length && (
         <Button variant="ghost" onClick={handleReturn}>
           Retornar <Undo2 />
         </Button>
       )}
-      {!data.length && !isFetching ? (
-        <p className="text-muted-foreground text-center text-lg">
-          Nenhum registro compatível com {`"${clientName}"`}
-        </p>
-      ) : (
-        <>
-          <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
-            {data.map((client) => (
-              <ClientCard client={client} key={client.id} />
-            ))}
-          </div>
-          <LoadMoreButton
-            data={data}
-            handleLoadMore={handleLoadMore}
-            isFetching={isFetching}
-          />
-        </>
+      <p className="text-muted-foreground text-center text-lg">
+        {!data.length && !isFetching
+          ? `Nenhum registro compatível com "${clientName}"`
+          : `Registros com "${clientName}"`}
+      </p>
+      <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
+        {data.map((client) => (
+          <ClientCard client={client} key={client.id} />
+        ))}
+      </div>
+      {!data.length && !isFetching && (
+        <LoadMoreButton
+          data={data}
+          handleLoadMore={handleLoadMore}
+          isFetching={isFetching}
+        />
       )}
     </section>
   );

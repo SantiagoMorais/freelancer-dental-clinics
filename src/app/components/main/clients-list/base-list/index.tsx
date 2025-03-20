@@ -2,27 +2,22 @@
 
 import { Client } from "@prisma/client";
 import { useQuery } from "@tanstack/react-query";
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 
 import { getClientsList } from "@/actions/get-clients-list";
+import { useClientsContext } from "@/contexts/clients-context";
 
 import { ClientCard } from "../client-card";
 import { LoadMoreButton } from "../load-more-button";
 
 export const BaseList = () => {
-  const [cursor, setCursor] = useState<string | undefined>(undefined);
-  const [clients, setClients] = useState<Client[]>([]);
+  const { clients, setClients, cursor, setCursor } = useClientsContext();
 
   const { data, isFetching } = useQuery<Client[]>({
     queryKey: ["clients", cursor],
     queryFn: () => getClientsList(cursor),
     staleTime: 1000 * 60, // 60 seconds
   });
-
-  useEffect(() => {
-    setClients([]);
-    setCursor(undefined);
-  }, []);
 
   useEffect(() => {
     if (data)
@@ -32,7 +27,7 @@ export const BaseList = () => {
         );
         return [...prev, ...newClients];
       });
-  }, [data]);
+  }, [data, setClients]);
 
   const handleLoadMore = () => {
     if (data && data.length > 0) {
