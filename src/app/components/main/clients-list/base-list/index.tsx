@@ -9,7 +9,7 @@ import { listClients } from "@/actions/list-clients";
 import { ClientCard } from "./client-card";
 import { LoadMoreButton } from "./load-more-button";
 
-export const ListClient = () => {
+export const BaseList = () => {
   const [cursor, setCursor] = useState<string | undefined>(undefined);
   const [clients, setClients] = useState<Client[]>([]);
 

@@ -1,4 +1,4 @@
-import { ListClient } from "./list-client";
+import { ClientsList } from "./clients-list";
 import { RegisterClientSheet } from "./register-client";
 
 export const Main = () => (
@@ -7,7 +7,7 @@ export const Main = () => (
       <div className="flex flex-wrap gap-2">
         <RegisterClientSheet />
       </div>
-      <ListClient />
+      <ClientsList />
     </section>
   </main>
 );
