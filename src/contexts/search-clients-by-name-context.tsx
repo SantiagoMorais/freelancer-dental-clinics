@@ -1,14 +1,18 @@
 "use client";
-import { createContext, useContext, useState } from "react";
+import React, { createContext, useContext, useState } from "react";
 
 interface ISearchPostByTitle {
   clientName: string;
-  setClientName: (title: string) => void;
+  setClientName: React.Dispatch<React.SetStateAction<string>>;
+  isLoading: boolean;
+  setIsLoading: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
 const SearchClientsByNameContext = createContext<ISearchPostByTitle>({
   clientName: "",
   setClientName: () => {},
+  isLoading: false,
+  setIsLoading: () => {},
 });
 
 export const useSearchPostByTitle = () =>
@@ -18,9 +22,12 @@ export const SearchClientsByNameProvider = ({
   children,
 }: React.PropsWithChildren) => {
   const [clientName, setClientName] = useState<string>("");
+  const [isLoading, setIsLoading] = useState<boolean>(false);
 
   return (
-    <SearchClientsByNameContext.Provider value={{ clientName, setClientName }}>
+    <SearchClientsByNameContext.Provider
+      value={{ clientName, setClientName, isLoading, setIsLoading }}
+    >
       {children}
     </SearchClientsByNameContext.Provider>
   );
