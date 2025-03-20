@@ -48,11 +48,10 @@ export const RegisterClientForm = () => {
   };
 
   const onSubmit = async (data: TFormRegisterClientSchema) => {
-    console.log("caiu aqui");
-
     await registerClientOnSubmitForm({ data, setIsLoading });
     form.reset();
     queryClient.invalidateQueries({ queryKey: ["clients"] });
+    queryClient.invalidateQueries({ queryKey: ["searchClients"] });
   };
 
   return (
