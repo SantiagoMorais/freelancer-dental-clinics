@@ -25,7 +25,13 @@ export const BaseList = () => {
 
   useEffect(() => {
     if (data) {
-      setClients((prev) => [...prev, ...data.clients]);
+      setClients((prev) => {
+        const newClients = data.clients.filter(
+          (newClient) => !prev.some((client) => client.id === newClient.id)
+        );
+
+        return [...prev, ...newClients];
+      });
       setHasMore(data.hasMore);
     }
   }, [data, setClients]);

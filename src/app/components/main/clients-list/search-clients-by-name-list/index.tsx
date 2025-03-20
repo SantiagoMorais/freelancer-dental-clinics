@@ -15,21 +15,39 @@ export const SearchClientsByNameList = () => {
   const { clientName, setClientName, setIsLoading } = useSearchClientsByName();
 
   const [cursor, setCursor] = useState<string | undefined>(undefined);
+  const [clients, setClients] = useState<Client[]>([]);
+  const [hasMore, setHasMore] = useState(true);
   const queryClient = useQueryClient();
 
-  const { data, isFetching } = useQuery<Client[]>({
+  const { data, isFetching } = useQuery<{
+    clients: Client[];
+    hasMore: boolean;
+  }>({
     queryKey: ["searchClients", cursor, clientName],
-    queryFn: () => searchByName(clientName),
+    queryFn: () => searchByName(clientName, cursor),
     staleTime: 1000 * 60, // 60 seconds
   });
+
+  useEffect(() => {
+    if (data) {
+      setClients((prev) => {
+        const newClients = data.clients.filter(
+          (newClient) => !prev.some((client) => client.id === newClient.id)
+        );
+        return [...prev, ...newClients];
+      });
+
+      setHasMore(data.hasMore);
+    }
+  }, [data]);
 
   useEffect(() => {
     setIsLoading(isFetching);
   }, [isFetching, setIsLoading]);
 
   const handleLoadMore = () => {
-    if (data && data.length > 0) {
-      const lastClientId = data[data.length - 1].id;
+    if (data && data.clients.length > 0) {
+      const lastClientId = data.clients[data.clients.length - 1].id;
       setCursor(lastClientId);
     }
   };
@@ -38,6 +56,8 @@ export const SearchClientsByNameList = () => {
     setClientName("");
     queryClient.invalidateQueries({ queryKey: ["clients"] });
     queryClient.invalidateQueries({ queryKey: ["searchClients"] });
+    setClients([]);
+    setCursor(undefined);
   };
 
   if (!data) return;
@@ -50,18 +70,18 @@ export const SearchClientsByNameList = () => {
         </Button>
       )}
       <p className="text-muted-foreground text-center text-lg">
-        {!data.length && !isFetching
+        {!clients.length && !isFetching
           ? `Nenhum registro compatível com "${clientName}"`
           : `Registros com "${clientName}"`}
       </p>
       <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
-        {data.map((client) => (
+        {clients.map((client) => (
           <ClientCard client={client} key={client.id} />
         ))}
       </div>
-      {!data.length && !isFetching && (
+      {data && data.clients.length > 0 && (
         <LoadMoreButton
-          data={data}
+          hasMore={hasMore}
           handleLoadMore={handleLoadMore}
           isFetching={isFetching}
         />
