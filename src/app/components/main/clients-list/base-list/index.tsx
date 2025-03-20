@@ -2,7 +2,7 @@
 
 import { Client } from "@prisma/client";
 import { useQuery } from "@tanstack/react-query";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 
 import { getClientsList } from "@/actions/get-clients-list";
 import { useClientsContext } from "@/contexts/clients-context";
@@ -12,26 +12,27 @@ import { LoadMoreButton } from "../load-more-button";
 
 export const BaseList = () => {
   const { clients, setClients, cursor, setCursor } = useClientsContext();
+  const [hasMore, setHasMore] = useState(true);
 
-  const { data, isFetching } = useQuery<Client[]>({
+  const { data, isFetching } = useQuery<{
+    clients: Client[];
+    hasMore: boolean;
+  }>({
     queryKey: ["clients", cursor],
     queryFn: () => getClientsList(cursor),
     staleTime: 1000 * 60, // 60 seconds
   });
 
   useEffect(() => {
-    if (data)
-      setClients((prev) => {
-        const newClients = data.filter(
-          (newClient) => !prev.some((client) => client.id === newClient.id)
-        );
-        return [...prev, ...newClients];
-      });
+    if (data) {
+      setClients((prev) => [...prev, ...data.clients]);
+      setHasMore(data.hasMore);
+    }
   }, [data, setClients]);
 
   const handleLoadMore = () => {
-    if (data && data.length > 0) {
-      const lastClientId = data[data.length - 1].id;
+    if (data && data.clients.length > 0) {
+      const lastClientId = data.clients[data.clients.length - 1].id;
       setCursor(lastClientId);
     }
   };
@@ -51,7 +52,7 @@ export const BaseList = () => {
         ))}
       </div>
       <LoadMoreButton
-        data={data}
+        hasMore={hasMore}
         handleLoadMore={handleLoadMore}
         isFetching={isFetching}
       />
