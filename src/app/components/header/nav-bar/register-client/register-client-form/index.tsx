@@ -44,7 +44,7 @@ export const RegisterClientForm = () => {
 
     setTimeout(() => {
       setButtonAction({ text: "Registrar cliente", disabled: false });
-    }, 3000); // Volta ao normal depois de 3 segundos
+    }, 3000); // Get back to normal after 3 seconds
   };
 
   const onSubmit = async (data: TFormRegisterClientSchema) => {
