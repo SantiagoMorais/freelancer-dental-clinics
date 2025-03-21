@@ -11,7 +11,7 @@ export const registerClientOnSubmitForm = async ({
   setIsLoading: React.Dispatch<React.SetStateAction<boolean>>;
 }) => {
   setIsLoading(true);
-  const address = `${data.street}, ${data.addressNumber} - ${data.neighborhood}, ${data.city} - ${data.state}`;
+  const address = `${data.street}, ${data.addressNumber} - ${data.neighborhood}, ${data.city} - ${data.state}${data.complement && ` (${data.complement})`}`;
 
   try {
     await registerClient({
