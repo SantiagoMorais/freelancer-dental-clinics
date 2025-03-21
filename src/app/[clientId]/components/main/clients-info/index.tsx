@@ -6,6 +6,7 @@ import { clientStatus } from "@/utils/client-status";
 import { clientsInfo } from "@/utils/clients-info";
 
 import { ClientName } from "./client-name";
+import { DeleteClientRegister } from "./delete-client-register";
 import { UpdateClientInfoSheet } from "./update-client-info-sheet";
 
 export const ClientsInfo = ({ client }: { client: Client }) => {
@@ -32,7 +33,10 @@ export const ClientsInfo = ({ client }: { client: Client }) => {
           ))}
         </section>
       </ScrollArea>
-      <UpdateClientInfoSheet client={client} />
+      <div className="mt-auto flex flex-wrap gap-4">
+        <UpdateClientInfoSheet client={client} />
+        <DeleteClientRegister client={client} />
+      </div>
     </section>
   );
 };
