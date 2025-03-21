@@ -10,7 +10,7 @@ export const ClientsInfo = ({ client }: { client: Client }) => {
   const statusResponse = clientStatus({ status: client.workingProgress });
 
   return (
-    <section className="bg-muted/50 border-muted flex w-full flex-col items-center gap-4 rounded-lg border p-4">
+    <section className="bg-muted/50 border-muted flex w-full flex-col items-center gap-4 rounded-lg border p-4 md:flex-1">
       <ClientName name={client.companyName} />
       <p className={`w-full font-semibold ${statusResponse.color}`}>
         {statusResponse.status}

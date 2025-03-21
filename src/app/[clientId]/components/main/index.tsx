@@ -40,7 +40,7 @@ export const Main = () => {
   if (!data) return;
 
   return (
-    <main className="flex min-h-full w-full flex-1 flex-col gap-4 p-4">
+    <main className="flex min-h-full w-full flex-1 flex-col gap-4 p-4 md:flex-row">
       <ClientsInfo client={data} />
       <ClientsProjects clientProjects={data.clientProjects} />
     </main>
