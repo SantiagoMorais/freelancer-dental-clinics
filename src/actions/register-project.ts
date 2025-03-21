@@ -22,6 +22,9 @@ export const registerProject = async ({ clientId, data }: IRegisterProject) => {
       serviceCategory: data.serviceCategory as ServiceCategory,
       servicePrice: Number(data.servicePrice),
       clientId,
+      projectName: data.projectName,
+      githubUrl: data.githubUrl ?? "",
+      projectUrl: data.projectUrl ?? "",
     },
   });
 };

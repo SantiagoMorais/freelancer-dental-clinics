@@ -28,15 +28,18 @@ model Client {
 }
 
 model ClientProject {
-    id               String          @id @default(cuid())
-    clientId         String
-    startedAt        DateTime        @default(now())
-    finishedAt       DateTime?
-    servicePrice     Float
-    serviceCategory  ServiceCategory
-    paymentStatus    PaymentStatus   @default(PENDING)
-    rating           Int?
-    review           String?
+    id              String          @id @default(cuid())
+    clientId        String
+    startedAt       DateTime        @default(now())
+    finishedAt      DateTime?
+    servicePrice    Float
+    serviceCategory ServiceCategory
+    paymentStatus   PaymentStatus   @default(PENDING)
+    rating          Int?
+    review          String?
+    projectName     String
+    githubUrl       String?
+    projectUrl      String?
 
     createdAt DateTime @default(now())
     updatedAt DateTime @default(now())

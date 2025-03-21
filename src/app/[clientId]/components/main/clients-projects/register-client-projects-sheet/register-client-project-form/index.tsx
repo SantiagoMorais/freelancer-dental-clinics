@@ -51,13 +51,16 @@ export const RegisterClientProjectForm = ({
     defaultValues: {
       serviceCategory: ServiceCategory.LANDING_PAGE,
       servicePrice: "",
+      projectName: "",
+      githubUrl: "",
+      projectUrl: "",
     },
   });
 
   const onSubmit = async (data: TRegisterProjectSchema) => {
+    setIsLoading(true);
     try {
       await registerProject({ clientId, data });
-      setIsLoading(true);
     } catch (error) {
       if (process.env.NODE_ENV === "development")
         console.error("Error on register a new project:", error);
@@ -81,24 +84,51 @@ export const RegisterClientProjectForm = ({
       <Toaster position="bottom-left" />
       <form
         onSubmit={form.handleSubmit(onSubmit, onError)}
-        className="flex h-full flex-col items-center justify-between gap-8 px-1"
+        className="flex h-full flex-col items-center justify-between gap-6 px-1"
       >
+        <FormField
+          control={form.control}
+          name="projectName"
+          render={({ field }) => (
+            <FormItem className="w-full">
+              <FormLabel className="text-lg font-semibold">
+                Nome do projeto <span className="text-destructive">*</span>
+              </FormLabel>
+              <FormControl>
+                <Input
+                  className="font-semibold"
+                  placeholder="Nome do projeto"
+                  {...field}
+                />
+              </FormControl>
+              <FormMessage />
+            </FormItem>
+          )}
+        />
         <FormField
           control={form.control}
           name="serviceCategory"
           render={({ field }) => (
-            <FormItem className="w-full space-y-2">
+            <FormItem className="w-full">
               <FormLabel className="text-lg font-semibold">
                 Categoria do serviço
               </FormLabel>
               <FormControl>
                 <Select defaultValue={field.value}>
                   <SelectTrigger className="w-full min-w-full">
-                    <SelectValue placeholder="Theme" defaultValue="light" />
+                    <SelectValue
+                      placeholder="Categoria"
+                      defaultValue={field.value}
+                      className="font-semibold"
+                    />
                   </SelectTrigger>
                   <SelectContent className="w-full">
                     {Object.values(ServiceCategory).map((category) => (
-                      <SelectItem key={category} value={category}>
+                      <SelectItem
+                        key={category}
+                        value={category}
+                        className="font-semibold"
+                      >
                         {serviceCategoryTranslations[category]}
                       </SelectItem>
                     ))}
@@ -113,14 +143,53 @@ export const RegisterClientProjectForm = ({
           control={form.control}
           name="servicePrice"
           render={({ field }) => (
-            <FormItem className="w-full space-y-2">
+            <FormItem className="w-full">
               <FormLabel className="text-lg font-semibold">
-                Valor cobrado
+                Valor cobrado <span className="text-destructive">*</span>
               </FormLabel>
               <FormControl>
                 <Input
+                  className="font-semibold"
                   type="number"
                   placeholder="Não adicione pontos ou vírgula"
+                  {...field}
+                />
+              </FormControl>
+              <FormMessage />
+            </FormItem>
+          )}
+        />
+        <FormField
+          control={form.control}
+          name="githubUrl"
+          render={({ field }) => (
+            <FormItem className="w-full">
+              <FormLabel className="text-lg font-semibold">
+                URL do projeto no Github (Opcional)
+              </FormLabel>
+              <FormControl>
+                <Input
+                  className="font-semibold"
+                  placeholder="URL Github"
+                  {...field}
+                />
+              </FormControl>
+              <FormMessage />
+            </FormItem>
+          )}
+        />
+        <FormField
+          control={form.control}
+          name="projectUrl"
+          render={({ field }) => (
+            <FormItem className="w-full">
+              <FormLabel className="text-lg font-semibold">
+                URL do deploy (Opcional)
+              </FormLabel>
+              <FormControl>
+                <Input
+                  className="font-semibold"
+                  placeholder="URL Github"
                   {...field}
                 />
               </FormControl>
