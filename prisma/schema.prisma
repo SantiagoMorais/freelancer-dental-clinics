@@ -30,14 +30,13 @@ model Client {
 model ClientProject {
     id               String          @id @default(cuid())
     clientId         String
-    startedAt        DateTime
+    startedAt        DateTime        @default(now())
     finishedAt       DateTime?
     servicePrice     Float
     serviceCategory  ServiceCategory
     paymentStatus    PaymentStatus   @default(PENDING)
     rating           Int?
     review           String?
-    websiteCreatedAt DateTime?
 
     createdAt DateTime @default(now())
     updatedAt DateTime @default(now())

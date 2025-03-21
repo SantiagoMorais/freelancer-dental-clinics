@@ -9,7 +9,7 @@ export const deleteClientRegister = async (clientId: string) => {
     },
   });
 
-  if (!client) throw new Error("Não existe um cliente registrado com este ID.");
+  if (!client) throw new Error("There is no client with this ID");
 
   await db.client.delete({
     where: { id: clientId },

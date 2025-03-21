@@ -29,7 +29,7 @@ export const UpdateClientInfoForm = ({ client }: { client: Client }) => {
   const [buttonAction, setButtonAction] = useState<{
     text: string;
     disabled: boolean;
-  }>({ text: "Registrar cliente", disabled: false });
+  }>({ text: "Editar dados", disabled: false });
   const [isLoading, setIsLoading] = useState(false);
   const [processingZipCode, setProcessingZipCode] = useState(false);
 
@@ -51,7 +51,7 @@ export const UpdateClientInfoForm = ({ client }: { client: Client }) => {
     setButtonAction({ text: "Revise os campos", disabled: true });
 
     setTimeout(() => {
-      setButtonAction({ text: "Registrar cliente", disabled: false });
+      setButtonAction({ text: "Editar dados", disabled: false });
     }, 3000); // Get back to normal after 3 seconds
   };
 
