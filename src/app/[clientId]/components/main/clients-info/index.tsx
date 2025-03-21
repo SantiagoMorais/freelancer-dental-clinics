@@ -10,20 +10,20 @@ export const ClientsInfo = ({ client }: { client: Client }) => {
   const statusResponse = clientStatus({ status: client.workingProgress });
 
   return (
-    <section className="bg-muted/50 border-muted flex w-full flex-1 flex-col items-center gap-4 rounded-lg border p-4">
+    <section className="bg-muted/50 border-muted flex w-full flex-col items-center gap-4 rounded-lg border p-4">
       <ClientName name={client.companyName} />
       <p className={`w-full font-semibold ${statusResponse.color}`}>
         {statusResponse.status}
       </p>
-      <div className="flex w-full flex-col gap-4">
+      <div className="flex w-full flex-col gap-2">
         {clientsInfo({ client }).map((info) => (
-          <>
-            <p key={info.title}>
+          <div key={info.title} className="flex w-full flex-col gap-2">
+            <p>
               <span className="font-semibold">{info.title}:</span> <br />
               {info.content}
             </p>
             <Separator />
-          </>
+          </div>
         ))}
       </div>
     </section>
