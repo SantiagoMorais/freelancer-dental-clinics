@@ -7,6 +7,7 @@ import { redirect, useParams } from "next/navigation";
 import { useEffect } from "react";
 
 import { getClientDetails } from "@/actions/get-client-details";
+import { TooltipProvider } from "@/components/ui/tooltip";
 
 import { ClientsInfo } from "./clients-info";
 import { ClientsProjects } from "./clients-projects";
@@ -25,8 +26,6 @@ export const Main = () => {
     if (!isFetching) {
       if (!data) return redirect("/");
     }
-
-    console.log(data);
   }, [isFetching, data]);
 
   if (isFetching)
@@ -40,9 +39,11 @@ export const Main = () => {
   if (!data) return;
 
   return (
-    <main className="flex min-h-full w-full flex-1 flex-col gap-4 p-4 md:flex-row">
-      <ClientsInfo client={data} />
-      <ClientsProjects clientProjects={data.clientProjects} />
+    <main className="flex min-h-full w-full max-w-(--breakpoint-2xl) flex-1 flex-col gap-4 p-4 md:flex-row">
+      <TooltipProvider>
+        <ClientsInfo client={data} />
+        <ClientsProjects clientProjects={data.clientProjects} />
+      </TooltipProvider>
     </main>
   );
 };

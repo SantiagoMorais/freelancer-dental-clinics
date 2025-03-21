@@ -1,4 +1,4 @@
-import { RegisterClientSheet } from "./register-client";
+import { RegisterClientSheet } from "./register-client-sheet";
 import { SearchClient } from "./search-client";
 
 export const NavBar = () => (
