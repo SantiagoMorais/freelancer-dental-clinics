@@ -1,38 +1,41 @@
 import { Client } from "@prisma/client";
 
-interface IClientsInfo {
+export interface IClientsInfo {
   title: string;
+  field: string;
   content: string;
 }
 
-export const clientsInfo = ({ client }: { client: Client }): IClientsInfo[] => [
-  { title: "Endereço", content: client.address },
-  {
-    title: "Já possui um site",
-    content: client.hasAnWebSite ? "Sim" : "Não",
-  },
-  {
-    title: "Último contato",
-    content: client.lastContactedAt ? client.lastContactedAt.toString() : "-",
-  },
-  {
-    title: "Horário de funcionamento",
-    content: client.openingHours,
-  },
-  {
-    title: "Telefone Celular",
-    content: client.mobilePhoneNumber ? client.mobilePhoneNumber : "-",
-  },
-  {
-    title: "Telefone fixo",
-    content: client.phoneNumber ? client.phoneNumber : "-",
-  },
-  {
-    title: "Notas extras",
-    content: client.notes ? client.notes : "-",
-  },
-  {
-    title: "Rede Social",
-    content: client.socialMedia ? client.socialMedia : "-",
-  },
-];
+const fieldTitles: Record<string, string> = {
+  address: "Endereço",
+  hasAnWebSite: "Já possui um site",
+  lastContactedAt: "Último contato",
+  openingHours: "Horário de funcionamento",
+  mobilePhoneNumber: "Telefone Celular",
+  phoneNumber: "Telefone fixo",
+  notes: "Notas extras",
+  socialMedia: "Rede Social",
+};
+
+export const clientsInfo = ({ client }: { client: Client }): IClientsInfo[] => {
+  return Object.keys(fieldTitles).map((field) => {
+    const value = client[field as keyof Client];
+    let content = value;
+
+    if (field === "hasAnWebSite") {
+      content = value ? "Sim" : "Não";
+    } else if (value === null || value === undefined) {
+      content = "-";
+    } else if (value instanceof Date) {
+      content = value.toString();
+    } else {
+      content = String(value);
+    }
+
+    return {
+      title: fieldTitles[field],
+      field,
+      content,
+    };
+  });
+};
