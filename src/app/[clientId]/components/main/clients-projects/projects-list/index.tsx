@@ -16,6 +16,8 @@ import { formatNumberToBRL } from "@/utils/projects-list-functions/format-number
 import { formatPaymentStatus } from "@/utils/projects-list-functions/format-payment-status";
 import { formatServiceCategory } from "@/utils/projects-list-functions/format-service-category";
 
+import { ConcludeProjectSheet } from "./conclude-project-dialog";
+
 export const ProjectsList = ({ projects }: { projects: ClientProject[] }) => (
   <section className="flex w-full flex-col gap-4">
     {projects.map((project) => (
@@ -75,7 +77,7 @@ export const ProjectsList = ({ projects }: { projects: ClientProject[] }) => (
               </a>
             )}
           </div>
-          {!project.finishedAt && (
+          {project.finishedAt && (
             <div className="space-y-4">
               <Separator />
               <div className="grid grid-cols-1 gap-2 lg:grid-cols-2">
@@ -112,7 +114,9 @@ export const ProjectsList = ({ projects }: { projects: ClientProject[] }) => (
         </CardContent>
         <CardFooter className="flex flex-col justify-center gap-4">
           <div className="flex w-full flex-wrap gap-4 md:w-fit">
-            <Button className="flex-1">Concluir projeto</Button>
+            <ConcludeProjectSheet
+              finishedProject={project.finishedAt ? true : false}
+            />
             <Button className="flex-1" variant="destructive">
               Excluir projeto
             </Button>
