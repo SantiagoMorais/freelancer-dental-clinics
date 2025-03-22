@@ -115,6 +115,7 @@ export const ProjectsList = ({ projects }: { projects: ClientProject[] }) => (
         <CardFooter className="flex flex-col justify-center gap-4">
           <div className="flex w-full flex-wrap gap-4 md:w-fit">
             <ConcludeProjectSheet
+              projectId={project.id}
               finishedProject={project.finishedAt ? true : false}
             />
             <Button className="flex-1" variant="destructive">

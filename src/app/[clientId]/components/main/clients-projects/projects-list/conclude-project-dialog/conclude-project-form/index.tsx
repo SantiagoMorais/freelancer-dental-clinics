@@ -8,7 +8,7 @@ import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { toast } from "sonner";
 
-import { deleteClientRegister } from "@/actions/delete-client-register";
+import { concludeProject } from "@/actions/conclude-project";
 import { Button } from "@/components/ui/button";
 import {
   Form,
@@ -26,7 +26,7 @@ import {
 import RatingInput from "./rating-input";
 import ReviewField from "./review-field";
 
-export const ConcludeProjectForm = () => {
+export const ConcludeProjectForm = ({ projectId }: { projectId: string }) => {
   const queryClient = useQueryClient();
   const { clientId } = useParams<{ clientId: string }>();
   const [isLoading, setIsLoading] = useState<boolean>(false);
@@ -40,7 +40,26 @@ export const ConcludeProjectForm = () => {
     },
   });
 
-  const onSubmit = async () => {};
+  const onSubmit = async (data: TConcludeProjectSchema) => {
+    try {
+      setIsLoading(true);
+      await concludeProject({
+        clientId,
+        finishedAt: data.finishedAt,
+        rating: data.rating,
+        projectId,
+      });
+    } catch (error) {
+      if (process.env.NODE_ENV === "development")
+        console.error("Error by editing project:", error);
+      toast.error(
+        "Não foi possível editar o projeto. Por favor, tente mais tarde."
+      );
+    } finally {
+      setIsLoading(false);
+      queryClient.invalidateQueries({ queryKey: ["clientDetails"] });
+    }
+  };
 
   return (
     <Form {...form}>

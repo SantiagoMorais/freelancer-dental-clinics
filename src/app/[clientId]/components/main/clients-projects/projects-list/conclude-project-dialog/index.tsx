@@ -13,8 +13,10 @@ import { ConcludeProjectForm } from "./conclude-project-form";
 
 export const ConcludeProjectSheet = ({
   finishedProject,
+  projectId,
 }: {
   finishedProject: boolean;
+  projectId: string;
 }) => (
   <Dialog>
     <DialogTrigger asChild>
@@ -36,7 +38,7 @@ export const ConcludeProjectSheet = ({
           . Não se preocupe! Caso mude de ideia, essa ação pode ser desfeita.
         </DialogDescription>
       </DialogHeader>
-      <ConcludeProjectForm />
+      <ConcludeProjectForm projectId={projectId} />
     </DialogContent>
   </Dialog>
 );
