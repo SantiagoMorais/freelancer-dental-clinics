@@ -19,8 +19,8 @@ import {
   formRegisterClientSchema,
   TFormRegisterClientSchema,
 } from "@/core/types/form-register-client-schema";
-import { registerClientOnSubmitForm } from "@/utils/register-client-on-submit-form";
-import { useFormDefaultValues } from "@/utils/use-form-default-values";
+import { registerClientOnSubmitForm } from "@/utils/register-client-functions/register-client-on-submit-form";
+import { useFormDefaultValues } from "@/utils/register-client-functions/use-form-default-values";
 
 import { FormFields } from "./form-fields";
 

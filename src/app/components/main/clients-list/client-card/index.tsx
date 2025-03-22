@@ -10,7 +10,7 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
-import { formatWorkingStatus } from "@/utils/format-working-status";
+import { formatWorkingStatus } from "@/utils/register-client-functions/format-working-status";
 
 export const ClientCard = ({
   client,

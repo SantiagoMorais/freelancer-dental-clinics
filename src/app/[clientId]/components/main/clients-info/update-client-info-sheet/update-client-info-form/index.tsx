@@ -21,8 +21,8 @@ import {
   formRegisterClientSchema,
   TFormRegisterClientSchema,
 } from "@/core/types/form-register-client-schema";
-import { updateClientInfoDefaultValues } from "@/utils/update-client-info-default-values";
-import { updateClientOnSubmitForm } from "@/utils/update-client-on-submit-form";
+import { updateClientInfoDefaultValues } from "@/utils/update-client-info-functions/update-client-info-default-values";
+import { updateClientOnSubmitForm } from "@/utils/update-client-info-functions/update-client-on-submit-form";
 
 export const UpdateClientInfoForm = ({ client }: { client: Client }) => {
   const queryClient = useQueryClient();

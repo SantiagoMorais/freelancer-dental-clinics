@@ -31,7 +31,7 @@ import {
   registerProjectSchema,
   TRegisterProjectSchema,
 } from "@/core/types/register-project-schema";
-import { serviceCategoryTranslations } from "@/utils/services-category-translations";
+import { serviceCategoryTranslations } from "@/utils/projects-list-functions/services-category-translations";
 
 export const RegisterClientProjectForm = ({
   clientId,

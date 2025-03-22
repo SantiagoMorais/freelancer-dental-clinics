@@ -11,8 +11,8 @@ import {
 import { Input } from "@/components/ui/input";
 import { Switch } from "@/components/ui/switch";
 import { TFormRegisterClientSchema } from "@/core/types/form-register-client-schema";
-import { formFields } from "@/utils/form-inputs-array";
-import { processZipCode } from "@/utils/process-zip-code";
+import { formFields } from "@/utils/register-client-functions/form-inputs-array";
+import { processZipCode } from "@/utils/register-client-functions/process-zip-code";
 
 interface IFormFields {
   form: UseFormReturn<TFormRegisterClientSchema>;

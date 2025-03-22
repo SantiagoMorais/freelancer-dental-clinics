@@ -2,8 +2,8 @@ import { Client } from "@prisma/client";
 
 import { ScrollArea } from "@/components/ui/scroll-area";
 import { Separator } from "@/components/ui/separator";
-import { clientStatus } from "@/utils/client-status";
-import { clientsInfo } from "@/utils/clients-info";
+import { clientStatus } from "@/utils/register-client-functions/client-status";
+import { clientsInfo } from "@/utils/register-client-functions/clients-info";
 
 import { ClientName } from "./client-name";
 import { DeleteClientRegister } from "./delete-client-register";
@@ -33,7 +33,7 @@ export const ClientsInfo = ({ client }: { client: Client }) => {
           ))}
         </section>
       </ScrollArea>
-      <div className="mt-auto flex flex-wrap gap-4">
+      <div className="mt-auto flex w-full flex-wrap justify-center gap-4 md:w-fit">
         <UpdateClientInfoSheet client={client} />
         <DeleteClientRegister client={client} />
       </div>

@@ -2,7 +2,7 @@ import { Client } from "@prisma/client";
 
 import { getZipCodeByAddress } from "@/functions/get-zip-code-by-address";
 
-import { parseAddress } from "./parse-address";
+import { parseAddress } from "../register-client-functions/parse-address";
 
 export const updateClientInfoDefaultValues = async ({
   client,
