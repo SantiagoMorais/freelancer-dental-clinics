@@ -16,7 +16,7 @@ export const UpdateClientInfoSheet = ({ client }: { client: Client }) => {
   return (
     <Sheet>
       <SheetTrigger asChild>
-        <Button className="mt-auto">Editar informações</Button>
+        <Button className="mt-auto flex-1">Editar informações</Button>
       </SheetTrigger>
       <SheetContent className="gap-0">
         <SheetHeader>

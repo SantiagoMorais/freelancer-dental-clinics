@@ -15,7 +15,9 @@ import { DeleteClientForm } from "./delete-client-form";
 export const DeleteClientRegister = ({ client }: { client: Client }) => (
   <Dialog>
     <DialogTrigger asChild>
-      <Button variant="destructive">Excluir Registro</Button>
+      <Button variant="destructive" className="flex-1">
+        Excluir Registro
+      </Button>
     </DialogTrigger>
     <DialogContent>
       <DialogHeader>

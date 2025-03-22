@@ -18,7 +18,9 @@ export const RegisterClientProjectsSheet = () => {
   return (
     <Sheet>
       <SheetTrigger asChild>
-        <Button className="mt-auto">Registrar Projeto</Button>
+        <Button className="mt-auto w-full max-w-96 md:w-fit">
+          Registrar Projeto
+        </Button>
       </SheetTrigger>
       <SheetContent className="h-full gap-0">
         <SheetHeader>
