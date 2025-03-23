@@ -1,3 +1,5 @@
+"use server";
+
 import { TConcludeProjectSchema } from "@/core/types/conclude-project-schema";
 import { db } from "@/lib/prisma";
 

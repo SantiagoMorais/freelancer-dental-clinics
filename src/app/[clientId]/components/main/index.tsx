@@ -39,7 +39,7 @@ export const Main = () => {
   if (!data) return;
 
   return (
-    <main className="flex min-h-full w-full max-w-(--breakpoint-2xl) flex-1 flex-col gap-4 p-4 md:flex-row">
+    <main className="flex min-h-full w-full max-w-(--breakpoint-2xl) flex-1 flex-col gap-4 overflow-hidden p-4 md:flex-row">
       <TooltipProvider>
         <ClientsInfo client={data} />
         <ClientsProjects clientProjects={data.clientProjects} />

@@ -18,7 +18,7 @@ export const ClientsInfo = ({ client }: { client: Client }) => {
       <p className={`w-full font-semibold ${statusResponse.color}`}>
         {statusResponse.status}
       </p>
-      <ScrollArea className="h-fit w-full md:max-h-full">
+      <ScrollArea className="h-fit w-full overflow-hidden md:max-h-full">
         <section className="flex size-full flex-col gap-3">
           {clientsInfo({ client }).map((info) => (
             <div key={info.title} className="flex w-full flex-col gap-2">
