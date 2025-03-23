@@ -43,7 +43,10 @@ export const formRegisterClientSchema = z.object({
       }
     )
     .optional(),
-  openingHours: z.string().min(1, { message: "Campo obrigatório" }),
+  openingHours: z
+    .string()
+    .min(1, { message: "Campo obrigatório" })
+    .max(100, { message: "Máximo 100 caracteres." }),
   socialMedia: z.coerce.string().optional(),
   hasAnWebSite: z.boolean().default(false),
   notes: z.coerce.string().optional(),
