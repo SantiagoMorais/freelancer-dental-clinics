@@ -32,7 +32,7 @@ export const ProjectFinishedDetails = ({
       {project.review && (
         <p className="bg-muted/50 border-muted-foreground/20 rounded-md border px-1 font-semibold">
           Avaliação do cliente:{" "}
-          <span className="font-normal">{project.review}</span>
+          <span className="font-normal">&quot;{project.review}&quot;</span>
         </p>
       )}
     </div>

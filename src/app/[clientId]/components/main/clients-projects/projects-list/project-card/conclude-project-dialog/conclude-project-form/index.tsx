@@ -49,6 +49,7 @@ export const ConcludeProjectForm = ({ projectId }: { projectId: string }) => {
         finishedAt: data.finishedAt,
         rating: data.rating,
         projectId,
+        review: data.review,
       });
     } catch (error) {
       if (process.env.NODE_ENV === "development")

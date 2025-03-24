@@ -22,10 +22,8 @@ const RatingInput = ({ field }: IRatingInput) => {
   const [hoverRating, setHoverRating] = useState<number>(0);
 
   const handleClick = (value: number) => {
-    console.log("value", value);
-    console.log("rating", rating);
-
     setRating(value === rating ? 0 : value);
+    field.onChange(value);
   };
 
   const handleMouseOver = (value: number) => {
