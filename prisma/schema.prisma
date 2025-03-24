@@ -43,7 +43,7 @@ model ClientProject {
 
     createdAt DateTime @default(now())
     updatedAt DateTime @default(now())
-    Client    Client   @relation(fields: [clientId], references: [id])
+    client    Client   @relation(fields: [clientId], references: [id], onDelete: Cascade)
 
     @@map("clientProjects")
 }

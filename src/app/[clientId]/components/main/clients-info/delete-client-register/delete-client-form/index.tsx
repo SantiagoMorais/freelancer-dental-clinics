@@ -33,9 +33,13 @@ export const DeleteClientForm = ({ clientName }: { clientName: string }) => {
   const deleteClientSchema = z.object({
     typeConfirmation: z
       .string()
-      .refine((value) => value === deleteMessageConfirmation, {
-        message: "O texto digitado não coincide.",
-      }),
+      .refine(
+        (value) =>
+          value.toLowerCase() === deleteMessageConfirmation.toLowerCase(),
+        {
+          message: "O texto digitado não coincide.",
+        }
+      ),
   });
 
   const form = useForm<{ typeConfirmation: string }>({
@@ -49,6 +53,10 @@ export const DeleteClientForm = ({ clientName }: { clientName: string }) => {
     try {
       setIsLoading(true);
       await deleteClientRegister(clientId);
+      queryClient.invalidateQueries({ queryKey: ["clients"] });
+      queryClient.invalidateQueries({ queryKey: ["searchClients"] });
+      router.push("/");
+      window.location.href = "/";
     } catch (error) {
       if (process.env.NODE_ENV === "development")
         console.error("Error by deleting client:", error);
@@ -57,10 +65,6 @@ export const DeleteClientForm = ({ clientName }: { clientName: string }) => {
       );
     } finally {
       setIsLoading(false);
-      queryClient.invalidateQueries({ queryKey: ["clients"] });
-      queryClient.invalidateQueries({ queryKey: ["searchClients"] });
-      router.push("/");
-      window.location.href = "/";
     }
   };
 
