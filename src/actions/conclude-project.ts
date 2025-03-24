@@ -26,7 +26,6 @@ export const concludeProject = async ({
       id: projectId,
     },
     data: {
-      clientId,
       finishedAt,
       rating,
       review,

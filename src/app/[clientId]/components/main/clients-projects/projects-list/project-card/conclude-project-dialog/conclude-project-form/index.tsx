@@ -10,6 +10,7 @@ import { toast } from "sonner";
 
 import { concludeProject } from "@/actions/conclude-project";
 import { Button } from "@/components/ui/button";
+import { DialogClose } from "@/components/ui/dialog";
 import {
   Form,
   FormField,
@@ -51,9 +52,9 @@ export const ConcludeProjectForm = ({ projectId }: { projectId: string }) => {
       });
     } catch (error) {
       if (process.env.NODE_ENV === "development")
-        console.error("Error by editing project:", error);
+        console.error("Error by editing project to concluded:", error);
       toast.error(
-        "Não foi possível editar o projeto. Por favor, tente mais tarde."
+        "Não foi possível editar o projeto para CONCLUÍDO. Por favor, tente mais tarde."
       );
     } finally {
       setIsLoading(false);
@@ -91,9 +92,14 @@ export const ConcludeProjectForm = ({ projectId }: { projectId: string }) => {
             </FormItem>
           )}
         />
-        <Button variant="destructive" disabled={isLoading}>
-          {isLoading ? <Loader2 className="animate-spin" /> : "Confirmar"}
-        </Button>
+        <div className="flex w-full flex-wrap items-center gap-4">
+          <Button variant="destructive" disabled={isLoading} className="flex-1">
+            {isLoading ? <Loader2 className="animate-spin" /> : "Confirmar"}
+          </Button>
+          <DialogClose asChild className="flex-1">
+            <Button>Cancelar</Button>
+          </DialogClose>
+        </div>
       </form>
     </Form>
   );

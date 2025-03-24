@@ -38,7 +38,7 @@ export const ProjectFinishedDetails = ({
     </div>
     {project.rating !== null && (
       <div className="flex w-full flex-col items-center">
-        <RatingDisplay rating={4} />
+        <RatingDisplay rating={project.rating} />
       </div>
     )}
   </>

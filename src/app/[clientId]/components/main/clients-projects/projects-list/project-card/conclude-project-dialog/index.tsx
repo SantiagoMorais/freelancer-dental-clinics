@@ -10,6 +10,7 @@ import {
 } from "@/components/ui/dialog";
 
 import { ConcludeProjectForm } from "./conclude-project-form";
+import { UndoProjectConclusion } from "./undo-project-conclusion";
 
 export const ConcludeProjectDialog = ({
   finishedProject,
@@ -38,7 +39,11 @@ export const ConcludeProjectDialog = ({
           . Não se preocupe! Caso mude de ideia, essa ação pode ser desfeita.
         </DialogDescription>
       </DialogHeader>
-      <ConcludeProjectForm projectId={projectId} />
+      {finishedProject ? (
+        <UndoProjectConclusion projectId={projectId} />
+      ) : (
+        <ConcludeProjectForm projectId={projectId} />
+      )}
     </DialogContent>
   </Dialog>
 );
