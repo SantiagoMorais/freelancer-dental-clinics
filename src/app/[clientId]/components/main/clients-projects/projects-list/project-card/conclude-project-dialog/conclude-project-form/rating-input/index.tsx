@@ -22,7 +22,10 @@ const RatingInput = ({ field }: IRatingInput) => {
   const [hoverRating, setHoverRating] = useState<number>(0);
 
   const handleClick = (value: number) => {
-    setRating(value);
+    console.log("value", value);
+    console.log("rating", rating);
+
+    setRating(value === rating ? 0 : value);
   };
 
   const handleMouseOver = (value: number) => {
@@ -58,8 +61,7 @@ const RatingInput = ({ field }: IRatingInput) => {
             className="focus:outline-none"
           >
             <Star
-              fill={(hoverRating || rating) >= value ? "#FFD700" : "none"}
-              className="size-6 text-lg text-orange-300"
+              className={`size-6 text-lg ${(hoverRating || rating) >= value ? "fill-yellow-400 text-yellow-600" : "fill-gray-500/40 text-gray-500/40"}`}
             />
           </Button>
         ))}
