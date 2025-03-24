@@ -11,7 +11,7 @@ import {
 
 import { ConcludeProjectForm } from "./conclude-project-form";
 
-export const ConcludeProjectSheet = ({
+export const ConcludeProjectDialog = ({
   finishedProject,
   projectId,
 }: {
