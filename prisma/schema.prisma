@@ -19,6 +19,7 @@ model Client {
     workingProgress   WorkingProgress
     lastContactedAt   DateTime?
     notes             String?
+    favorite          Boolean         @default(false)
 
     createdAt      DateTime        @default(now())
     updatedAt      DateTime        @default(now())

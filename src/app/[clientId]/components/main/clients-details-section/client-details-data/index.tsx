@@ -32,7 +32,7 @@ export const ClientDetailsData = () => {
   const statusResponse = clientStatus({ status: client.workingProgress });
 
   return (
-    <div className="flex h-full w-full flex-col gap-4">
+    <div className="flex h-full w-full flex-1 flex-col gap-4 overflow-hidden">
       {isFetching ? (
         <p className="flex items-center gap-2">
           Carregando... <Loader2 className="animate-spin" />
@@ -44,7 +44,7 @@ export const ClientDetailsData = () => {
           <p className={`w-full font-semibold ${statusResponse.color}`}>
             {statusResponse.status}
           </p>
-          <ScrollArea className="h-fit w-full overflow-hidden md:max-h-full">
+          <ScrollArea className="max-h-full w-full overflow-hidden md:max-h-full">
             <section className="flex size-full flex-col gap-3">
               {clientsInfo({ client }).map((info) => (
                 <div key={info.title} className="flex w-full flex-col gap-2">

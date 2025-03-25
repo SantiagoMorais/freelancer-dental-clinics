@@ -1,4 +1,4 @@
-import { Prisma } from "@prisma/client";
+import { Client } from "@prisma/client";
 import { Plus } from "lucide-react";
 import Link from "next/link";
 
@@ -12,14 +12,15 @@ import {
 } from "@/components/ui/card";
 import { formatWorkingStatus } from "@/utils/register-client-functions/format-working-status";
 
-export const ClientCard = ({
-  client,
-}: {
-  client: Prisma.ClientCreateInput;
-}) => (
+import { FavoriteClient } from "./favorite-client";
+
+export const ClientCard = ({ client }: { client: Client }) => (
   <Card key={client.id} className="bg-muted/50 gap-4">
     <CardHeader>
-      <CardTitle className="truncate">{client.companyName}</CardTitle>
+      <div className="flex justify-between">
+        <CardTitle className="truncate">{client.companyName}</CardTitle>
+        <FavoriteClient client={client} />
+      </div>
       <CardDescription className="">
         Status:{" "}
         <span

@@ -8,7 +8,7 @@ export const registerClient = async (data: TRegisterClientSchema) => {
   });
 
   if (client)
-    throw new Error("Já existe um cliente registrado com este endereço.");
+    throw new Error("There already is a client registered with this address");
 
   await db.client.create({
     data: {
