@@ -20,7 +20,6 @@ import {
   FormMessage,
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
-import { Toaster } from "@/components/ui/sonner";
 
 export const DeleteClientForm = ({ clientName }: { clientName: string }) => {
   const queryClient = useQueryClient();

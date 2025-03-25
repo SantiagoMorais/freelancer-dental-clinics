@@ -7,7 +7,6 @@ import { useParams } from "next/navigation";
 import { useEffect, useState } from "react";
 
 import { getClientDetails } from "@/actions/get-client-details";
-import { Toaster } from "@/components/ui/sonner";
 
 import { DeleteClientRegister } from "./delete-client-register";
 import { UpdateClientInfoSheet } from "./update-client-info-sheet";
