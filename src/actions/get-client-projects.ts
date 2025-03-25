@@ -2,9 +2,11 @@ import { ClientProject } from "@prisma/client";
 
 import { db } from "@/lib/prisma";
 
-export const getClientProjects = async (
-  clientId: string
-): Promise<ClientProject[]> => {
+export const getClientProjects = async ({
+  clientId,
+}: {
+  clientId: string;
+}): Promise<ClientProject[]> => {
   const client = await db.client.findUnique({
     where: { id: clientId },
   });
