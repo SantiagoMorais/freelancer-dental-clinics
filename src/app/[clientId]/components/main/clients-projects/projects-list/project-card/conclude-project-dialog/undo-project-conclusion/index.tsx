@@ -9,7 +9,6 @@ import { toast } from "sonner";
 import { undoProjectConclusion } from "@/actions/undo-project-conclusion";
 import { Button } from "@/components/ui/button";
 import { DialogClose } from "@/components/ui/dialog";
-import { Toaster } from "@/components/ui/sonner";
 
 export const UndoProjectConclusion = ({ projectId }: { projectId: string }) => {
   const queryClient = useQueryClient();
@@ -34,8 +33,6 @@ export const UndoProjectConclusion = ({ projectId }: { projectId: string }) => {
 
   return (
     <div className="flex w-full flex-wrap items-center gap-4">
-      <Toaster position="bottom-center" />
-
       <Button
         variant="destructive"
         disabled={isLoading}

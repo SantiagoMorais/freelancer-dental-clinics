@@ -26,7 +26,6 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
-import { Toaster } from "@/components/ui/sonner";
 import {
   registerProjectSchema,
   TRegisterProjectSchema,
@@ -81,7 +80,6 @@ export const RegisterClientProjectForm = ({
 
   return (
     <Form {...form}>
-      <Toaster position="bottom-left" />
       <form
         onSubmit={form.handleSubmit(onSubmit, onError)}
         className="flex h-full flex-col items-center justify-between gap-6 px-1"

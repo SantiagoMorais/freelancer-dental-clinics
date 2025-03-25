@@ -18,7 +18,6 @@ import {
   FormLabel,
   FormMessage,
 } from "@/components/ui/form";
-import { Toaster } from "@/components/ui/sonner";
 import {
   concludeProjectSchema,
   TConcludeProjectSchema,
@@ -65,8 +64,6 @@ export const ConcludeProjectForm = ({ projectId }: { projectId: string }) => {
 
   return (
     <Form {...form}>
-      <Toaster position="bottom-center" />
-
       <form
         onSubmit={form.handleSubmit(onSubmit)}
         className="flex w-full flex-col items-center gap-4"

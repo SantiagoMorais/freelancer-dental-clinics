@@ -70,8 +70,6 @@ export const DeleteClientForm = ({ clientName }: { clientName: string }) => {
 
   return (
     <Form {...form}>
-      <Toaster position="bottom-center" />
-
       <form
         onSubmit={form.handleSubmit(onSubmit)}
         className="flex w-full flex-col items-center gap-4"

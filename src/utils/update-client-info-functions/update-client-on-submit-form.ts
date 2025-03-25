@@ -1,3 +1,5 @@
+import { toast } from "sonner";
+
 import { updateClient } from "@/actions/update-client";
 import { TFormRegisterClientSchema } from "@/core/types/form-register-client-schema";
 
@@ -27,6 +29,7 @@ export const updateClientOnSubmitForm = async ({
       }),
       ...(data.phoneNumber && { phoneNumber: data.phoneNumber }),
     });
+    toast.success("Dados atualizados com sucesso!");
   } catch (error) {
     console.error("Error updating client info:", error);
   } finally {

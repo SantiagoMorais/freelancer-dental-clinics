@@ -14,7 +14,6 @@ import {
 } from "@/components/ui/alert-dialog";
 import { Button } from "@/components/ui/button";
 import { Form } from "@/components/ui/form";
-import { Toaster } from "@/components/ui/sonner";
 import {
   formRegisterClientSchema,
   TFormRegisterClientSchema,
@@ -68,7 +67,6 @@ export const RegisterClientForm = () => {
           </AlertDialogContent>
         </AlertDialog>
       )}
-      <Toaster position="bottom-left" />
       <form
         onSubmit={form.handleSubmit(onSubmit, onError)}
         className="flex flex-col items-center gap-8 px-1"
