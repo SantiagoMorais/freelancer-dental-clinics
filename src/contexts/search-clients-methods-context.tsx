@@ -6,8 +6,6 @@ interface ISearchPostByTitle {
   setClientName: React.Dispatch<React.SetStateAction<string>>;
   isLoading: boolean;
   setIsLoading: React.Dispatch<React.SetStateAction<boolean>>;
-  favoriteClients: boolean;
-  setFavoriteClients: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
 const SearchClientsMethodsContext = createContext<ISearchPostByTitle>({
@@ -15,8 +13,6 @@ const SearchClientsMethodsContext = createContext<ISearchPostByTitle>({
   setClientName: () => {},
   isLoading: false,
   setIsLoading: () => {},
-  favoriteClients: false,
-  setFavoriteClients: () => {},
 });
 
 export const SearchClientsMethodsProvider = ({
@@ -24,7 +20,6 @@ export const SearchClientsMethodsProvider = ({
 }: React.PropsWithChildren) => {
   const [clientName, setClientName] = useState<string>("");
   const [isLoading, setIsLoading] = useState<boolean>(false);
-  const [favoriteClients, setFavoriteClients] = useState<boolean>(false);
 
   return (
     <SearchClientsMethodsContext.Provider
@@ -33,8 +28,6 @@ export const SearchClientsMethodsProvider = ({
         setClientName,
         isLoading,
         setIsLoading,
-        favoriteClients,
-        setFavoriteClients,
       }}
     >
       {children}

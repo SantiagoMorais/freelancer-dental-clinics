@@ -12,15 +12,10 @@ import {
 } from "@/components/ui/card";
 import { formatWorkingStatus } from "@/utils/register-client-functions/format-working-status";
 
-import { FavoriteClient } from "./favorite-client";
-
 export const ClientCard = ({ client }: { client: Client }) => (
   <Card key={client.id} className="bg-muted/50 gap-4">
     <CardHeader>
-      <div className="flex justify-between">
-        <CardTitle className="truncate">{client.companyName}</CardTitle>
-        <FavoriteClient client={client} />
-      </div>
+      <CardTitle className="truncate">{client.companyName}</CardTitle>
       <CardDescription className="">
         Status:{" "}
         <span
