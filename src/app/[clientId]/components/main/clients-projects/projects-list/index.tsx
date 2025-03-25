@@ -1,3 +1,5 @@
+"use client";
+
 import { ClientProject } from "@prisma/client";
 import { useQuery } from "@tanstack/react-query";
 import { Loader2 } from "lucide-react";
@@ -11,27 +13,26 @@ import { ProjectCard } from "./project-card";
 
 export const ProjectsList = () => {
   const { clientId } = useParams<{ clientId: string }>();
-  const [projects, setProjects] = useState<ClientProject[] | null>(null);
+  const [projects, setProjects] = useState<ClientProject[]>([]);
   const { data, isFetching } = useQuery<ClientProject[]>({
     queryKey: ["clientProjects"],
-    queryFn: async () => getClientProjects({ clientId }),
+    queryFn: () => getClientProjects({ clientId }),
     staleTime: 60 * 100, // 60 seconds
   });
 
   useEffect(() => {
     if (data) setProjects(data);
-  }, [data]);
+  }, [data, projects]);
 
   const content = () => {
-    if (!projects)
-      return <p>Não foi possível encontrar os dados dos projetos</p>;
-    if (projects.length === 0) return <p>Nenhum Projeto Iniciado</p>;
     if (isFetching)
       return (
-        <p className="flex items-center gap-2">
+        <p className="flex items-center justify-center gap-2 text-center">
           Carregando... <Loader2 className="animate-spin" />
         </p>
       );
+    if (projects.length === 0)
+      return <p className="text-center">Nenhum Projeto Iniciado</p>;
 
     return (
       <ScrollArea className="flex h-full w-full flex-col gap-4 overflow-auto rounded-lg">

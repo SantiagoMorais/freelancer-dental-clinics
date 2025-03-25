@@ -4,6 +4,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { ServiceCategory } from "@prisma/client";
 import { useQueryClient } from "@tanstack/react-query";
 import { Loader2 } from "lucide-react";
+import { useParams } from "next/navigation";
 import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { toast } from "sonner";
@@ -32,11 +33,9 @@ import {
 } from "@/core/types/register-project-schema";
 import { serviceCategoryTranslations } from "@/utils/projects-list-functions/services-category-translations";
 
-export const RegisterClientProjectForm = ({
-  clientId,
-}: {
-  clientId: string;
-}) => {
+export const RegisterClientProjectForm = () => {
+  const { clientId } = useParams<{ clientId: string }>();
+
   const queryClient = useQueryClient();
   const [buttonAction, setButtonAction] = useState<{
     text: string;
@@ -60,13 +59,15 @@ export const RegisterClientProjectForm = ({
     setIsLoading(true);
     try {
       await registerProject({ clientId, data });
+      toast.success("Projeto criado com sucesso!");
+      queryClient.invalidateQueries({ queryKey: ["clientProjects"] });
+      form.unregister();
     } catch (error) {
       if (process.env.NODE_ENV === "development")
         console.error("Error on register a new project:", error);
+      toast.error("Não foi possível criar o projeto!");
     } finally {
-      queryClient.invalidateQueries({ queryKey: ["clientDetails"] });
       setIsLoading(false);
-      toast.success("Projeto criado com sucesso!");
     }
   };
 
