@@ -2,7 +2,11 @@
 
 import { db } from "@/lib/prisma";
 
-export const deleteClientRegister = async (clientId: string) => {
+export const deleteClientRegister = async ({
+  clientId,
+}: {
+  clientId: string;
+}) => {
   const client = db.client.findUnique({
     where: {
       id: clientId,

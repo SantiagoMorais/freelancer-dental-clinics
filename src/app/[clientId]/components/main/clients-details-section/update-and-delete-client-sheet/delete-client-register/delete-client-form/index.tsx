@@ -3,13 +3,10 @@
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useQueryClient } from "@tanstack/react-query";
 import { Loader2 } from "lucide-react";
-import { useParams, useRouter } from "next/navigation";
+import { useParams } from "next/navigation";
 import { useState } from "react";
 import { useForm } from "react-hook-form";
-import { toast } from "sonner";
-import { z } from "zod";
 
-import { deleteClientRegister } from "@/actions/delete-client-register";
 import { Button } from "@/components/ui/button";
 import {
   Form,
@@ -20,51 +17,30 @@ import {
   FormMessage,
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
+import { deleteClientOnSubmitForm } from "@/utils/delete-client-functions/delete-client-on-submit-form";
+import {
+  deleteClientSchema,
+  deleteMessageConfirmation,
+} from "@/utils/delete-client-functions/delete-client-schema";
 
 export const DeleteClientForm = ({ clientName }: { clientName: string }) => {
   const queryClient = useQueryClient();
-  const router = useRouter();
   const { clientId } = useParams<{ clientId: string }>();
   const [isLoading, setIsLoading] = useState<boolean>(false);
 
-  const deleteMessageConfirmation = `Excluir ${clientName.slice(0, 50)}`;
-
-  const deleteClientSchema = z.object({
-    typeConfirmation: z
-      .string()
-      .refine(
-        (value) =>
-          value.toLowerCase() === deleteMessageConfirmation.toLowerCase(),
-        {
-          message: "O texto digitado não coincide.",
-        }
-      ),
-  });
-
   const form = useForm<{ typeConfirmation: string }>({
-    resolver: zodResolver(deleteClientSchema),
+    resolver: zodResolver(deleteClientSchema({ clientName })),
     defaultValues: {
       typeConfirmation: "",
     },
   });
 
   const onSubmit = async () => {
-    try {
-      setIsLoading(true);
-      await deleteClientRegister(clientId);
-      queryClient.invalidateQueries({ queryKey: ["clients"] });
-      queryClient.invalidateQueries({ queryKey: ["searchClients"] });
-      router.push("/");
-      window.location.href = "/";
-    } catch (error) {
-      if (process.env.NODE_ENV === "development")
-        console.error("Error by deleting client:", error);
-      toast.error(
-        "Não foi possível excluir o registro. Por favor, tente mais tarde."
-      );
-    } finally {
-      setIsLoading(false);
-    }
+    await deleteClientOnSubmitForm({
+      clientId,
+      setIsLoading,
+      queryClient,
+    });
   };
 
   return (
@@ -82,7 +58,7 @@ export const DeleteClientForm = ({ clientName }: { clientName: string }) => {
                 Para concluir a exclusão digite o texto abaixo:
                 <span className="text-destructive">
                   {`"`}
-                  {deleteMessageConfirmation}
+                  {deleteMessageConfirmation({ clientName })}
                   {`"`}
                 </span>
               </FormLabel>
