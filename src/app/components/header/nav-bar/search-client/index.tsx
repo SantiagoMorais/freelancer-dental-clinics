@@ -8,7 +8,7 @@ import { z } from "zod";
 import { Button } from "@/components/ui/button";
 import { Form, FormControl, FormField, FormItem } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
-import { useSearchClientsByName } from "@/contexts/search-clients-by-name-context";
+import { useSearchClientsMethods } from "@/contexts/search-clients-methods-context";
 
 export const searchClientsFormSchema = z.object({
   name: z.string().min(1).trim(),
@@ -17,7 +17,7 @@ export const searchClientsFormSchema = z.object({
 export type TSearchClientsForm = z.infer<typeof searchClientsFormSchema>;
 
 export const SearchClient = () => {
-  const { setClientName, isLoading } = useSearchClientsByName();
+  const { setClientName, isLoading } = useSearchClientsMethods();
 
   const form = useForm<TSearchClientsForm>({
     resolver: zodResolver(searchClientsFormSchema),

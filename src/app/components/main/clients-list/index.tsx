@@ -1,12 +1,12 @@
 "use client";
 
-import { useSearchClientsByName } from "@/contexts/search-clients-by-name-context";
+import { useSearchClientsMethods } from "@/contexts/search-clients-methods-context";
 
 import { BaseList } from "./base-list";
 import { SearchClientsByNameList } from "./search-clients-by-name-list";
 
 export const ClientsList = () => {
-  const { clientName } = useSearchClientsByName();
+  const { clientName } = useSearchClientsMethods();
 
   return <>{clientName ? <SearchClientsByNameList /> : <BaseList />}</>;
 };

@@ -6,13 +6,13 @@ import { useEffect, useState } from "react";
 
 import { searchByName } from "@/actions/search-by-name";
 import { Button } from "@/components/ui/button";
-import { useSearchClientsByName } from "@/contexts/search-clients-by-name-context";
+import { useSearchClientsMethods } from "@/contexts/search-clients-methods-context";
 
 import { ClientCard } from "../client-card";
 import { LoadMoreButton } from "../load-more-button";
 
 export const SearchClientsByNameList = () => {
-  const { clientName, setClientName, setIsLoading } = useSearchClientsByName();
+  const { clientName, setClientName, setIsLoading } = useSearchClientsMethods();
 
   const [cursor, setCursor] = useState<string | undefined>(undefined);
   const [clients, setClients] = useState<Client[]>([]);
