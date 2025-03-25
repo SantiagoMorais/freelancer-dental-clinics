@@ -1,17 +1,15 @@
 import { ClientProject } from "@prisma/client";
 
-import { Button } from "@/components/ui/button";
 import {
   Card,
   CardContent,
   CardDescription,
-  CardFooter,
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
 import { projectDetails } from "@/utils/projects-list-functions/project-details-array";
 
-import { ConcludeProjectDialog } from "./conclude-project-dialog";
+import { ProjectCardFooter } from "./project-card-footer";
 import { ProjectFinishedDetails } from "./project-finished-details";
 import { ProjectLink } from "./project-link";
 
@@ -52,16 +50,6 @@ export const ProjectCard = ({ project }: { project: ClientProject }) => (
       </div>
       {project.finishedAt && <ProjectFinishedDetails project={project} />}
     </CardContent>
-    <CardFooter className="flex flex-col justify-center gap-4">
-      <div className="flex w-full flex-wrap gap-4 md:w-fit">
-        <ConcludeProjectDialog
-          projectId={project.id}
-          finishedProject={project.finishedAt ? true : false}
-        />
-        <Button className="flex-1" variant="destructive">
-          Excluir projeto
-        </Button>
-      </div>
-    </CardFooter>
+    <ProjectCardFooter project={project} />
   </Card>
 );
