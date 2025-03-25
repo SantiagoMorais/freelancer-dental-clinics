@@ -19,6 +19,8 @@ export const UndoProjectConclusion = ({ projectId }: { projectId: string }) => {
     try {
       setIsLoading(true);
       await undoProjectConclusion({ clientId, projectId });
+      queryClient.invalidateQueries({ queryKey: ["clientProjects"] });
+      toast.success("Projeto editado para INACABADO com sucesso!");
     } catch (error) {
       if (process.env.NODE_ENV === "development")
         console.error("Error by editing project to not concluded:", error);
@@ -27,7 +29,6 @@ export const UndoProjectConclusion = ({ projectId }: { projectId: string }) => {
       );
     } finally {
       setIsLoading(false);
-      queryClient.invalidateQueries({ queryKey: ["clientDetails"] });
     }
   };
 

@@ -50,6 +50,8 @@ export const ConcludeProjectForm = ({ projectId }: { projectId: string }) => {
         projectId,
         review: data.review,
       });
+      queryClient.invalidateQueries({ queryKey: ["clientProjects"] });
+      toast.success("Projeto concluído com sucesso!");
     } catch (error) {
       if (process.env.NODE_ENV === "development")
         console.error("Error by editing project to concluded:", error);
@@ -58,7 +60,6 @@ export const ConcludeProjectForm = ({ projectId }: { projectId: string }) => {
       );
     } finally {
       setIsLoading(false);
-      queryClient.invalidateQueries({ queryKey: ["clientDetails"] });
     }
   };
 
