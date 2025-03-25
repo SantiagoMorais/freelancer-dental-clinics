@@ -6,9 +6,7 @@ import { Loader2 } from "lucide-react";
 import { useParams } from "next/navigation";
 import { useState } from "react";
 import { useForm } from "react-hook-form";
-import { toast } from "sonner";
 
-import { concludeProject } from "@/actions/conclude-project";
 import { Button } from "@/components/ui/button";
 import { DialogClose } from "@/components/ui/dialog";
 import {
@@ -22,6 +20,7 @@ import {
   concludeProjectSchema,
   TConcludeProjectSchema,
 } from "@/core/types/conclude-project-schema";
+import { concludeProjectFormOnSubmit } from "@/utils/projects-list-functions/conclude-project-form-on-submit";
 
 import RatingInput from "./rating-input";
 import ReviewField from "./review-field";
@@ -41,26 +40,13 @@ export const ConcludeProjectForm = ({ projectId }: { projectId: string }) => {
   });
 
   const onSubmit = async (data: TConcludeProjectSchema) => {
-    try {
-      setIsLoading(true);
-      await concludeProject({
-        clientId,
-        finishedAt: data.finishedAt,
-        rating: data.rating,
-        projectId,
-        review: data.review,
-      });
-      queryClient.invalidateQueries({ queryKey: ["clientProjects"] });
-      toast.success("Projeto concluído com sucesso!");
-    } catch (error) {
-      if (process.env.NODE_ENV === "development")
-        console.error("Error by editing project to concluded:", error);
-      toast.error(
-        "Não foi possível editar o projeto para CONCLUÍDO. Por favor, tente mais tarde."
-      );
-    } finally {
-      setIsLoading(false);
-    }
+    await concludeProjectFormOnSubmit({
+      clientId,
+      data,
+      projectId,
+      setIsLoading,
+    });
+    queryClient.invalidateQueries({ queryKey: ["clientProjects"] });
   };
 
   return (
