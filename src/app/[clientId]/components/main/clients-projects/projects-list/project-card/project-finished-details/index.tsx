@@ -12,8 +12,8 @@ export const ProjectFinishedDetails = ({
   project: ClientProject;
 }) => (
   <>
-    <div className="space-y-4">
-      <Separator />
+    <Separator />
+    <div className="space-y-2">
       <div className="grid grid-cols-1 gap-2 lg:grid-cols-2">
         <p className="bg-muted/50 border-muted-foreground/20 rounded-md border px-1 font-semibold">
           Data da entrega:{" "}
@@ -35,11 +35,11 @@ export const ProjectFinishedDetails = ({
           <span className="font-normal">&quot;{project.review}&quot;</span>
         </p>
       )}
+      {project.rating !== null && (
+        <div className="flex w-full flex-col items-center">
+          <RatingDisplay rating={project.rating} />
+        </div>
+      )}
     </div>
-    {project.rating !== null && (
-      <div className="flex w-full flex-col items-center">
-        <RatingDisplay rating={project.rating} />
-      </div>
-    )}
   </>
 );
