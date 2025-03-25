@@ -32,7 +32,7 @@ export const ClientDetailsData = () => {
   const statusResponse = clientStatus({ status: client.workingProgress });
 
   return (
-    <div className="flex w-full justify-center gap-4">
+    <div className="flex h-full w-full flex-col gap-4">
       {isFetching ? (
         <p className="flex items-center gap-2">
           Carregando... <Loader2 className="animate-spin" />
@@ -40,6 +40,7 @@ export const ClientDetailsData = () => {
       ) : (
         <>
           <ClientName name={client.companyName} />
+          <Separator />
           <p className={`w-full font-semibold ${statusResponse.color}`}>
             {statusResponse.status}
           </p>
