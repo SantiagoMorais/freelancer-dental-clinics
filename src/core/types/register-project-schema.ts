@@ -1,7 +1,7 @@
 import { ServiceCategory } from "@prisma/client";
 import { z } from "zod";
 
-const serviceCategoryValues = Object.values(ServiceCategory) as [
+export const serviceCategoryValues = Object.values(ServiceCategory) as [
   string,
   ...string[],
 ];
