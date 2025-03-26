@@ -8,6 +8,7 @@ import { useState } from "react";
 import { useForm } from "react-hook-form";
 
 import { Button } from "@/components/ui/button";
+import { DialogClose } from "@/components/ui/dialog";
 import {
   Form,
   FormControl,
@@ -79,9 +80,26 @@ export const DeleteProjectForm = ({
             </FormItem>
           )}
         />
-        <Button variant="destructive" disabled={isLoading}>
-          {isLoading ? <Loader2 className="animate-spin" /> : "Confirmar"}
-        </Button>
+        <div className="flex w-full flex-wrap gap-4">
+          <DialogClose asChild>
+            <Button
+              type="button"
+              disabled={isLoading}
+              variant="secondary"
+              className="flex-1"
+            >
+              Cancelar
+            </Button>
+          </DialogClose>
+          <Button
+            variant="destructive"
+            disabled={isLoading}
+            type="submit"
+            className="flex-1"
+          >
+            {isLoading ? <Loader2 className="animate-spin" /> : "Confirmar"}
+          </Button>
+        </div>
       </form>
     </Form>
   );

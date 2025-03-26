@@ -34,6 +34,11 @@ export const UndoProjectConclusion = ({ projectId }: { projectId: string }) => {
 
   return (
     <div className="flex w-full flex-wrap items-center gap-4">
+      <DialogClose asChild>
+        <Button className="flex-1" variant="secondary">
+          Cancelar
+        </Button>
+      </DialogClose>
       <Button
         variant="destructive"
         disabled={isLoading}
@@ -42,9 +47,6 @@ export const UndoProjectConclusion = ({ projectId }: { projectId: string }) => {
       >
         {isLoading ? <Loader2 className="animate-spin" /> : "Confirmar"}
       </Button>
-      <DialogClose asChild>
-        <Button className="flex-1">Cancelar</Button>
-      </DialogClose>
     </div>
   );
 };

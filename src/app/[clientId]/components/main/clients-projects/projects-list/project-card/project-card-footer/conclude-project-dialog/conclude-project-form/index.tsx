@@ -78,12 +78,14 @@ export const ConcludeProjectForm = ({ projectId }: { projectId: string }) => {
           )}
         />
         <div className="flex w-full flex-wrap items-center gap-4">
-          <Button variant="destructive" disabled={isLoading} className="flex-1">
+          <DialogClose asChild className="flex-1">
+            <Button type="button" variant="destructive" className="flex-1">
+              Cancelar
+            </Button>
+          </DialogClose>
+          <Button type="submit" disabled={isLoading} className="flex-1">
             {isLoading ? <Loader2 className="animate-spin" /> : "Confirmar"}
           </Button>
-          <DialogClose asChild className="flex-1">
-            <Button>Cancelar</Button>
-          </DialogClose>
         </div>
       </form>
     </Form>

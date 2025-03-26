@@ -105,9 +105,6 @@ export const UpdateClientStatusForm = ({
           )}
         />
         <div className="flex w-full flex-wrap gap-4">
-          <Button disabled={isLoading} className="flex-1" type="submit">
-            {isLoading ? <Loader2 className="animate-spin" /> : "Atualizar"}
-          </Button>
           <DialogClose asChild>
             <Button
               type="button"
@@ -118,6 +115,9 @@ export const UpdateClientStatusForm = ({
               Cancelar
             </Button>
           </DialogClose>
+          <Button disabled={isLoading} className="flex-1" type="submit">
+            {isLoading ? <Loader2 className="animate-spin" /> : "Atualizar"}
+          </Button>
         </div>
       </form>
     </Form>
