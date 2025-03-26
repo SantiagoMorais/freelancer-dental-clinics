@@ -6,11 +6,16 @@ import { formatDate } from "@/utils/projects-list-functions/format-date";
 
 import { RatingDisplay } from "./rating-display";
 
+interface IProjectFinishedDetails {
+  project: Pick<
+    ClientProject,
+    "finishedAt" | "startedAt" | "review" | "rating"
+  >;
+}
+
 export const ProjectFinishedDetails = ({
   project,
-}: {
-  project: ClientProject;
-}) => (
+}: IProjectFinishedDetails) => (
   <>
     <Separator />
     <div className="space-y-2">

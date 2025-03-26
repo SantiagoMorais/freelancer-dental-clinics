@@ -1,4 +1,3 @@
-import { ClientProject } from "@prisma/client";
 import { Dialog } from "@radix-ui/react-dialog";
 
 import { Button } from "@/components/ui/button";
@@ -12,11 +11,15 @@ import {
 
 import { DeleteProjectForm } from "./delete-project-form";
 
+interface IDeleteProjectDialog {
+  projectName: string;
+  projectId: string;
+}
+
 export const DeleteProjectDialog = ({
-  project,
-}: {
-  project: ClientProject;
-}) => (
+  projectId,
+  projectName,
+}: IDeleteProjectDialog) => (
   <Dialog>
     <DialogTrigger asChild>
       <Button className="flex-1" variant="destructive">
@@ -35,10 +38,7 @@ export const DeleteProjectDialog = ({
           Para concluir a exclusão digite o texto abaixo:
         </DialogDescription>
       </DialogHeader>
-      <DeleteProjectForm
-        projectId={project.id}
-        projectName={project.projectName}
-      />
+      <DeleteProjectForm projectId={projectId} projectName={projectName} />
     </DialogContent>
   </Dialog>
 );

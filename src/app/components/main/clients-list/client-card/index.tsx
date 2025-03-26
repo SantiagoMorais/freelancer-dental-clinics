@@ -11,8 +11,14 @@ import {
   CardTitle,
 } from "@/components/ui/card";
 import { formatWorkingStatus } from "@/utils/register-client-functions/format-working-status";
+interface IClientCardProps {
+  client: Pick<
+    Client,
+    "companyName" | "workingProgress" | "id" | "openingHours" | "address"
+  >;
+}
 
-export const ClientCard = ({ client }: { client: Client }) => (
+export const ClientCard = ({ client }: IClientCardProps) => (
   <Card key={client.id} className="bg-muted/50 gap-4">
     <CardHeader>
       <CardTitle className="truncate">{client.companyName}</CardTitle>

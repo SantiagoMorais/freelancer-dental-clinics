@@ -5,17 +5,22 @@ import { formatNumberToBRL } from "./format-number-to-BRL";
 import { formatPaymentStatus } from "./format-payment-status";
 import { formatServiceCategory } from "./format-service-category";
 
-interface IProjectDetails {
+interface IProjectDetailsResponse {
   label: string;
   value: string;
   extraClass?: string | undefined;
 }
 
+interface IProjectDetailsRequest {
+  project: Pick<
+    ClientProject,
+    "createdAt" | "paymentStatus" | "serviceCategory" | "servicePrice"
+  >;
+}
+
 export const projectDetails = ({
   project,
-}: {
-  project: ClientProject;
-}): IProjectDetails[] => [
+}: IProjectDetailsRequest): IProjectDetailsResponse[] => [
   {
     label: "Criado em",
     value: formatDate(project.createdAt),
