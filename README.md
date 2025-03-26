@@ -13,6 +13,7 @@ Tecnologias utilizadas
 ## Sumário
 
 - [Regras de Negócio][#regras-de-negocio]
+- [Imagens](#imagens)
 - [Como executar o projeto](#como-executar-o-projeto)
 - [Autor do Projeto](#autor-do-projeto)
 
@@ -25,6 +26,23 @@ Tecnologias utilizadas
 - [x] Deve ser possível definir o projeto com concluído ou desfazer essa ação
 - [x] Deve ser possível pesquisar clientes cadastrados pelo nome
 
+## Imagens
+
+- Lista de clientes. Carrega somente 10 clientes por vez para melhor desempenho.
+
+![Lista de clientes](./src/assets/imgs/clients-list.png)
+
+- Criação de um novo projeto na parte de detalhes do cliente. É possível criar vários projetos para o mesmo cliente e administrá-los separadamente.
+
+![Criação de projeto](./src/assets/imgs/project-creation.png)
+
+- Ao concluir um projeto o status dele muda para `concluído`e é possível definir uma avaliação e análise.
+
+![Conclusão do projeto](./src/assets/imgs/project-conclusion.png)
+
+- É possível excluir tanto um registro de um projeto quanto o registro de um cliente, ao digitar o texto indicado corretamente para confirmação. Assim o registro é removido do banco de dados.
+
+![Exclusão do projeto](./src/assets/imgs/project-exclusion.png)
 
 ## Como executar o projeto
 
