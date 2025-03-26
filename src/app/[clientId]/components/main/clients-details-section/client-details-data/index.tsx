@@ -13,6 +13,7 @@ import { clientStatus } from "@/utils/register-client-functions/client-status";
 import { clientsInfo } from "@/utils/register-client-functions/clients-info";
 
 import { ClientName } from "./client-name";
+import { UpdateClientStatusDialog } from "./update-client-status-dialog";
 
 export const ClientDetailsData = () => {
   const { clientId } = useParams<{ clientId: string }>();
@@ -41,9 +42,12 @@ export const ClientDetailsData = () => {
         <>
           <ClientName name={client.companyName} />
           <Separator />
-          <p className={`w-full font-semibold ${statusResponse.color}`}>
-            {statusResponse.status}
-          </p>
+          <div className="flex w-full flex-wrap items-center gap-4">
+            <p className={`w-fit font-semibold ${statusResponse.color}`}>
+              {statusResponse.status}
+            </p>
+            <UpdateClientStatusDialog />
+          </div>
           <ScrollArea className="max-h-full w-full overflow-hidden md:max-h-full">
             <section className="flex size-full flex-col gap-3">
               {clientsInfo({ client }).map((info) => (
