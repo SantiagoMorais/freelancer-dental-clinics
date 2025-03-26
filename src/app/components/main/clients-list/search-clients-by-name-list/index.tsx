@@ -13,37 +13,40 @@ import { LoadMoreButton } from "../load-more-button";
 
 export const SearchClientsByNameList = () => {
   const { clientName, setClientName, setIsLoading } = useSearchClientsMethods();
-
   const [cursor, setCursor] = useState<string | undefined>(undefined);
   const [clients, setClients] = useState<Client[]>([]);
   const [hasMore, setHasMore] = useState(true);
   const queryClient = useQueryClient();
 
+  useEffect(() => {
+    setClients([]);
+    setCursor(undefined);
+    setHasMore(true);
+  }, [clientName]);
+
   const { data, isFetching } = useQuery<{
     clients: Client[];
     hasMore: boolean;
   }>({
-    queryKey: ["searchClients", cursor, clientName],
+    queryKey: ["searchClients", clientName, cursor],
     queryFn: () => searchByName(clientName, cursor),
     staleTime: 1000 * 60, // 60 seconds
   });
 
   useEffect(() => {
-    if (data) {
-      setClients((prev) => {
-        const newClients = data.clients.filter(
-          (newClient) => !prev.some((client) => client.id === newClient.id)
-        );
-        return [...prev, ...newClients];
-      });
-
-      setHasMore(data.hasMore);
-    }
-  }, [data]);
-
-  useEffect(() => {
     setIsLoading(isFetching);
   }, [isFetching, setIsLoading]);
+
+  useEffect(() => {
+    if (data) {
+      if (cursor) {
+        setClients((prev) => [...prev, ...data.clients]);
+      } else {
+        setClients(data.clients);
+      }
+      setHasMore(data.hasMore);
+    }
+  }, [data, cursor]);
 
   const handleLoadMore = () => {
     if (data && data.clients.length > 0) {
@@ -55,9 +58,6 @@ export const SearchClientsByNameList = () => {
   const handleReturn = () => {
     setClientName("");
     queryClient.invalidateQueries({ queryKey: ["clients"] });
-    queryClient.invalidateQueries({ queryKey: ["searchClients"] });
-    setClients([]);
-    setCursor(undefined);
   };
 
   if (!data) return;
