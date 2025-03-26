@@ -46,7 +46,7 @@ export const ClientDetailsData = () => {
             <p className={`w-fit font-semibold ${statusResponse.color}`}>
               {statusResponse.status}
             </p>
-            <UpdateClientStatusDialog />
+            <UpdateClientStatusDialog currentStatus={client.workingProgress} />
           </div>
           <ScrollArea className="max-h-full w-full overflow-hidden md:max-h-full">
             <section className="flex size-full flex-col gap-3">

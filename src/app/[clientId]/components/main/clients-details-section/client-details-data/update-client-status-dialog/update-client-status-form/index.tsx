@@ -29,13 +29,17 @@ import {
 import { TUpdateClientStatusSchema } from "@/core/types/update-client-status-schema";
 import { workingStatusTranslations } from "@/utils/projects-list-functions/working-status-translations";
 
-export const UpdateClientStatusForm = () => {
+export const UpdateClientStatusForm = ({
+  currentStatus,
+}: {
+  currentStatus: WorkingProgress;
+}) => {
   const { clientId } = useParams<{ clientId: string }>();
   const queryClient = useQueryClient();
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const form = useForm<{ status: WorkingProgress }>({
     defaultValues: {
-      status: WorkingProgress.AVAILABLE,
+      status: currentStatus,
     },
   });
 
@@ -47,6 +51,7 @@ export const UpdateClientStatusForm = () => {
         status: data.status as WorkingProgress,
       });
       queryClient.invalidateQueries({ queryKey: ["clientDetails"] });
+      queryClient.invalidateQueries({ queryKey: ["clients"], exact: false });
       toast.success("Status do cliente atualizados com sucesso!");
     } catch (error) {
       if (process.env.NODE_ENV === "development")
@@ -58,6 +63,7 @@ export const UpdateClientStatusForm = () => {
       setIsLoading(false);
     }
   };
+
   return (
     <Form {...form}>
       <form onSubmit={form.handleSubmit(onSubmit)}>

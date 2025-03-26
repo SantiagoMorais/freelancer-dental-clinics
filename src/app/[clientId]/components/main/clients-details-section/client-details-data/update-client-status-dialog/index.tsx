@@ -1,3 +1,4 @@
+import { WorkingProgress } from "@prisma/client";
 import { SquarePen } from "lucide-react";
 
 import { Button } from "@/components/ui/button";
@@ -12,7 +13,11 @@ import {
 
 import { UpdateClientStatusForm } from "./update-client-status-form";
 
-export const UpdateClientStatusDialog = () => (
+export const UpdateClientStatusDialog = ({
+  currentStatus,
+}: {
+  currentStatus: WorkingProgress;
+}) => (
   <Dialog>
     <DialogTrigger asChild>
       <Button variant="outline" className="opacity-80 hover:opacity-100">
@@ -26,7 +31,7 @@ export const UpdateClientStatusDialog = () => (
           O status pode ser mudado sempre que desejar.
         </DialogDescription>
       </DialogHeader>
-      <UpdateClientStatusForm />
+      <UpdateClientStatusForm currentStatus={currentStatus} />
     </DialogContent>
   </Dialog>
 );

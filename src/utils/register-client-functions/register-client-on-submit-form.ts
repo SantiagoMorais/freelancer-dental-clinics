@@ -33,7 +33,9 @@ export const registerClientOnSubmitForm = async ({
     );
   } catch (error) {
     console.error("Error registering a new client:", error);
-    toast.error(`Erro: ${error}`, { description: "" });
+    toast.error(
+      `Erro: ao registrar novo cliente. Por favor, tente mais tarde.`
+    );
   } finally {
     setIsLoading(false);
   }
