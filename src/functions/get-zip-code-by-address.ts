@@ -12,7 +12,7 @@ export const getZipCodeByAddress = async ({
       `https://viacep.com.br/ws/${state}/${city}/${street}/json/`
     );
 
-    if (!response.ok) throw new Error("Falha ao coletar o CEP.");
+    if (!response.ok) return [{ cep: "" }];
 
     const data: { cep: string }[] = await response.json();
 
