@@ -58,7 +58,7 @@ export const RegisterClientForm = () => {
       {processingZipCode && (
         <AlertDialog open>
           <AlertDialogContent className="flex flex-col items-center gap-4">
-            <AlertDialogTitle className="text-2xl font-bold uppercase">
+            <AlertDialogTitle className="text-center text-2xl font-bold uppercase">
               Carregando Endereço
             </AlertDialogTitle>
             <AlertDialogDescription>
