@@ -1,4 +1,3 @@
-import { Client } from "@prisma/client";
 import { Plus } from "lucide-react";
 import Link from "next/link";
 
@@ -10,13 +9,8 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
+import { IClientCardProps } from "@/core/interfaces/client-card-props";
 import { formatWorkingStatus } from "@/utils/register-client-functions/format-working-status";
-interface IClientCardProps {
-  client: Pick<
-    Client,
-    "companyName" | "workingProgress" | "id" | "openingHours" | "address"
-  >;
-}
 
 export const ClientCard = ({ client }: IClientCardProps) => (
   <Card key={client.id} className="bg-muted/50 gap-4">

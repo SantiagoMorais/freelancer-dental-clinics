@@ -1,15 +1,8 @@
-export interface IAddress {
-  logradouro: string;
-  complemento: string;
-  bairro: string;
-  localidade: string;
-  uf: string;
-  erro?: boolean;
-}
+import { IGetAddressByZipCode } from "@/core/interfaces/get-address-by-zip-code-function";
 
 export const getAddressByZipCode = async (
   zipCode: string
-): Promise<IAddress> => {
+): Promise<IGetAddressByZipCode> => {
   const formatedZipCode = zipCode.replace(/-/g, "");
 
   try {
@@ -19,7 +12,7 @@ export const getAddressByZipCode = async (
 
     if (!response.ok) throw new Error("Falha ao procurar endereço.");
 
-    const data: IAddress = await response.json();
+    const data: IGetAddressByZipCode = await response.json();
 
     if (data.erro) throw new Error("CEP inválido.");
 

@@ -1,12 +1,8 @@
 "use server";
 
+import { IClientAndProjectId } from "@/core/interfaces/client-and-project-id";
 import { TConcludeProjectSchema } from "@/core/types/conclude-project-schema";
 import { db } from "@/lib/prisma";
-
-interface IConcludeProject extends TConcludeProjectSchema {
-  clientId: string;
-  projectId: string;
-}
 
 export const concludeProject = async ({
   finishedAt,
@@ -14,7 +10,7 @@ export const concludeProject = async ({
   review,
   clientId,
   projectId,
-}: IConcludeProject) => {
+}: IClientAndProjectId & TConcludeProjectSchema) => {
   const client = await db.client.findUnique({
     where: { id: clientId },
   });

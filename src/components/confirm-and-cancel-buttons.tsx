@@ -1,13 +1,9 @@
 import { Loader2 } from "lucide-react";
 
+import { IConfirmAndCancelButtonsProps } from "@/core/interfaces/confirm-and-cancel-button-props";
+
 import { Button } from "./ui/button";
 import { DialogClose } from "./ui/dialog";
-
-interface IConfirmAndCancelButtonsProps {
-  onClickFunction?: () => void;
-  isLoading?: boolean;
-  colors: "primary" | "secondary";
-}
 
 export const ConfirmAndCancelButtons = ({
   onClickFunction,

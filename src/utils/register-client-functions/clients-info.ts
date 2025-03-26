@@ -1,10 +1,6 @@
 import { Client } from "@prisma/client";
 
-export interface IClientsInfo {
-  title: string;
-  field: string;
-  content: string;
-}
+import { IClientsInfo } from "@/core/interfaces/clients-info-function";
 
 const fieldTitles: Record<string, string> = {
   address: "Endereço",

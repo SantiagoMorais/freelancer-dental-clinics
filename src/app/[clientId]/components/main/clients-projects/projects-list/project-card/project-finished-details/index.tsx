@@ -1,17 +1,9 @@
-import { ClientProject } from "@prisma/client";
-
 import { Separator } from "@/components/ui/separator";
+import { IProjectFinishedDetails } from "@/core/interfaces/project-finished-details-props";
 import { calculateTimeInterval } from "@/utils/projects-list-functions/calculate-time-interval";
 import { formatDate } from "@/utils/projects-list-functions/format-date";
 
 import { RatingDisplay } from "./rating-display";
-
-interface IProjectFinishedDetails {
-  project: Pick<
-    ClientProject,
-    "finishedAt" | "startedAt" | "review" | "rating"
-  >;
-}
 
 export const ProjectFinishedDetails = ({
   project,

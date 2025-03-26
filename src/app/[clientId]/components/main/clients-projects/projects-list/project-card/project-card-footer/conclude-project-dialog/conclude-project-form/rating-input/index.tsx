@@ -1,21 +1,10 @@
 import { Star } from "lucide-react";
 import { useState } from "react";
-import { ControllerRenderProps } from "react-hook-form";
 
 import { Button } from "@/components/ui/button";
 import { FormControl } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
-
-export interface IRatingInput {
-  field: ControllerRenderProps<
-    {
-      rating: number;
-      finishedAt: Date;
-      review?: string | undefined;
-    },
-    "rating"
-  >;
-}
+import { IRatingInput } from "@/core/interfaces/rating-input-props";
 
 const RatingInput = ({ field }: IRatingInput) => {
   const [rating, setRating] = useState<number>(0);

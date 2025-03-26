@@ -2,13 +2,8 @@
 
 import { ServiceCategory } from "@prisma/client";
 
-import { TRegisterProjectSchema } from "@/core/types/register-project-schema";
+import { IRegisterProject } from "@/core/interfaces/register-project-action";
 import { db } from "@/lib/prisma";
-
-interface IRegisterProject {
-  clientId: string;
-  data: TRegisterProjectSchema;
-}
 
 export const registerProject = async ({ clientId, data }: IRegisterProject) => {
   const client = await db.client.findUnique({

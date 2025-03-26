@@ -1,12 +1,7 @@
 import { Loader2 } from "lucide-react";
 
 import { Button } from "@/components/ui/button";
-
-interface ILoadMoreButtonProps {
-  isFetching: boolean;
-  hasMore: boolean;
-  handleLoadMore: () => void;
-}
+import { ILoadMoreButtonProps } from "@/core/interfaces/load-more-button-props";
 
 export const LoadMoreButton = ({
   isFetching,

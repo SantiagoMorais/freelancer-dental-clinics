@@ -11,15 +11,13 @@ import {
 
 import { DeleteProjectForm } from "./delete-project-form";
 
-interface IDeleteProjectDialog {
-  projectName: string;
-  projectId: string;
-}
-
 export const DeleteProjectDialog = ({
   projectId,
   projectName,
-}: IDeleteProjectDialog) => (
+}: {
+  projectName: string;
+  projectId: string;
+}) => (
   <Dialog>
     <DialogTrigger asChild>
       <Button className="flex-1" variant="destructive">

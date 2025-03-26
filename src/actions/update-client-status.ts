@@ -2,16 +2,13 @@
 
 import { WorkingProgress } from "@prisma/client";
 
+import { IClientId } from "@/core/interfaces/client-and-project-id";
 import { db } from "@/lib/prisma";
 
 export const updateClientStatus = async ({
   clientId,
   status,
-}: {
-  clientId: string;
-  status: WorkingProgress;
-}) => {
-  console.log("Atualizando status:", { clientId, status }); // Log de depuração
+}: IClientId & { status: WorkingProgress }) => {
   const updatedClient = await db.client.update({
     where: {
       id: clientId,
@@ -21,6 +18,5 @@ export const updateClientStatus = async ({
     },
   });
 
-  console.log("Cliente atualizado:", updatedClient); // Log do resultado
   return updatedClient;
 };

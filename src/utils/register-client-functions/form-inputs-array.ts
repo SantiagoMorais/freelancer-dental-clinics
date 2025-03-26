@@ -1,14 +1,4 @@
-import { TFormRegisterClientSchema } from "@/core/types/form-register-client-schema";
-
-interface FormFieldConfig {
-  name: keyof TFormRegisterClientSchema;
-  label: string;
-  type: string;
-  placeholder?: string;
-  required?: boolean;
-  format?: string;
-  customComponent?: "PatternFormat" | "Switch";
-}
+import { FormFieldConfig } from "@/core/interfaces/form-field-config-array";
 
 export const formFields: FormFieldConfig[] = [
   {

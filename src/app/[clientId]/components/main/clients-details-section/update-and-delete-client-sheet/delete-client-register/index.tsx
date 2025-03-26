@@ -12,11 +12,11 @@ import {
 
 import { DeleteClientForm } from "./delete-client-form";
 
-interface IDeleteClientRegister {
+export const DeleteClientRegister = ({
+  client,
+}: {
   client: Pick<Client, "companyName">;
-}
-
-export const DeleteClientRegister = ({ client }: IDeleteClientRegister) => (
+}) => (
   <Dialog>
     <DialogTrigger asChild>
       <Button variant="destructive" className="flex-1">

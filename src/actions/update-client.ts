@@ -1,17 +1,8 @@
 "use server";
+import { IUpdateClientAction } from "@/core/interfaces/update-client-action";
 import { db } from "@/lib/prisma";
 
-export const updateClient = async (data: {
-  id: string;
-  companyName: string;
-  address: string;
-  hasAnWebSite: boolean;
-  openingHours: string;
-  socialMedia?: string;
-  notes?: string;
-  mobilePhoneNumber?: string;
-  phoneNumber?: string;
-}) => {
+export const updateClient = async (data: IUpdateClientAction) => {
   await db.client.update({
     where: { id: data.id },
     data: {

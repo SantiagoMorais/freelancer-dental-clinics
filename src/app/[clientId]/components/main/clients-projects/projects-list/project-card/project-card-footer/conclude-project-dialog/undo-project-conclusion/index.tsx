@@ -7,8 +7,9 @@ import { toast } from "sonner";
 
 import { undoProjectConclusion } from "@/actions/undo-project-conclusion";
 import { ConfirmAndCancelButtons } from "@/components/confirm-and-cancel-buttons";
+import { IProjectId } from "@/core/interfaces/client-and-project-id";
 
-export const UndoProjectConclusion = ({ projectId }: { projectId: string }) => {
+export const UndoProjectConclusion = ({ projectId }: IProjectId) => {
   const queryClient = useQueryClient();
   const { clientId } = useParams<{ clientId: string }>();
   const [isLoading, setIsLoading] = useState<boolean>(false);

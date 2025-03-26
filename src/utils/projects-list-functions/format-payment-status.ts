@@ -1,13 +1,11 @@
 import { PaymentStatus } from "@prisma/client";
 
-interface IFormatPaymentStatus {
-  value: string;
-  color: string;
-}
-
 export const formatPaymentStatus = (
   status: PaymentStatus
-): IFormatPaymentStatus => {
+): {
+  value: string;
+  color: string;
+} => {
   if (status === "PENDING") return { value: "Pendente", color: "text-red-500" };
   if (status === "PAID") return { value: "Pago", color: "text-green-500" };
   if (status === "PARTIAL")

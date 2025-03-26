@@ -10,20 +10,18 @@ import {
 
 import { RegisterClientForm } from "./register-client-form";
 
-export const RegisterClientSheet = () => {
-  return (
-    <Sheet>
-      <SheetTrigger asChild>
-        <Button variant="outline">Registrar Cliente</Button>
-      </SheetTrigger>
-      <SheetContent className="gap-0">
-        <SheetHeader>
-          <SheetTitle className="text-2xl uppercase">Registrar</SheetTitle>
-        </SheetHeader>
-        <ScrollArea className="size-full border-t px-3 py-4 pb-24">
-          <RegisterClientForm />
-        </ScrollArea>
-      </SheetContent>
-    </Sheet>
-  );
-};
+export const RegisterClientSheet = () => (
+  <Sheet>
+    <SheetTrigger asChild>
+      <Button variant="outline">Registrar Cliente</Button>
+    </SheetTrigger>
+    <SheetContent className="gap-0">
+      <SheetHeader>
+        <SheetTitle className="text-2xl uppercase">Registrar</SheetTitle>
+      </SheetHeader>
+      <ScrollArea className="size-full border-t px-3 py-4 pb-24">
+        <RegisterClientForm />
+      </ScrollArea>
+    </SheetContent>
+  </Sheet>
+);

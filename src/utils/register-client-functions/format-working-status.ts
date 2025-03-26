@@ -7,14 +7,12 @@ enum WorkingProgress {
   FINISHED = "FINISHED",
 }
 
-interface IStatusResponse {
-  status: string;
-  color: string;
-}
-
 export const formatWorkingStatus = (
   status: $Enums.WorkingProgress
-): IStatusResponse => {
+): {
+  status: string;
+  color: string;
+} => {
   switch (status) {
     case WorkingProgress.IN_PROGRESS:
       return { status: "Em progresso", color: "text-yellow-500" };

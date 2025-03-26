@@ -3,18 +3,15 @@
 import { zodResolver } from "@hookform/resolvers/zod";
 import { Loader2, Search } from "lucide-react";
 import { useForm } from "react-hook-form";
-import { z } from "zod";
 
 import { Button } from "@/components/ui/button";
 import { Form, FormControl, FormField, FormItem } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
 import { useSearchClientsMethods } from "@/contexts/search-clients-methods-context";
-
-export const searchClientsFormSchema = z.object({
-  name: z.string().min(1).trim(),
-});
-
-export type TSearchClientsForm = z.infer<typeof searchClientsFormSchema>;
+import {
+  searchClientsFormSchema,
+  TSearchClientsForm,
+} from "@/core/types/search-clients-form-schema";
 
 export const SearchClient = () => {
   const { setClientName, isLoading } = useSearchClientsMethods();

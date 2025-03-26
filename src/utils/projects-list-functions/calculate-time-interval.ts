@@ -1,18 +1,15 @@
 import dayjs from "dayjs";
 import duration from "dayjs/plugin/duration";
 
-// Extend dayjs with the duration plugin
 dayjs.extend(duration);
-
-interface ICalculateTimeInterval {
-  startDate: Date;
-  endDate: Date | null;
-}
 
 export const calculateTimeInterval = ({
   startDate,
   endDate,
-}: ICalculateTimeInterval): string => {
+}: {
+  startDate: Date;
+  endDate: Date | null;
+}): string => {
   if (!endDate) return "Data inválida";
   const start = dayjs(startDate);
   const end = dayjs(endDate);

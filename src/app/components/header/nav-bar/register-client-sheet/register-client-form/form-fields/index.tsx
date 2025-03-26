@@ -1,4 +1,3 @@
-import { UseFormReturn } from "react-hook-form";
 import { PatternFormat } from "react-number-format";
 
 import {
@@ -10,14 +9,9 @@ import {
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
 import { Switch } from "@/components/ui/switch";
-import { TFormRegisterClientSchema } from "@/core/types/form-register-client-schema";
+import { IFormFields } from "@/core/interfaces/form-fields-props";
 import { formFields } from "@/utils/register-client-functions/form-inputs-array";
 import { processZipCode } from "@/utils/register-client-functions/process-zip-code";
-
-interface IFormFields {
-  form: UseFormReturn<TFormRegisterClientSchema>;
-  setProcessingZipCode: React.Dispatch<React.SetStateAction<boolean>>;
-}
 
 export const FormFields = ({ form, setProcessingZipCode }: IFormFields) => {
   const handleGetZipCodeValue = async (

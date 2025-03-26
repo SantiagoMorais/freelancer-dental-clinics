@@ -1,16 +1,12 @@
 "use server";
 
+import { IClientAndProjectId } from "@/core/interfaces/client-and-project-id";
 import { db } from "@/lib/prisma";
-
-interface IUndoProjectConclusion {
-  clientId: string;
-  projectId: string;
-}
 
 export const undoProjectConclusion = async ({
   projectId,
   clientId,
-}: IUndoProjectConclusion) => {
+}: IClientAndProjectId) => {
   const client = await db.client.findUnique({
     where: { id: clientId },
   });

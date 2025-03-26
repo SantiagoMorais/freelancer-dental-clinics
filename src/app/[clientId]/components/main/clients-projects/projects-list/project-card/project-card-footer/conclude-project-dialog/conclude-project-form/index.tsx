@@ -14,6 +14,7 @@ import {
   FormLabel,
   FormMessage,
 } from "@/components/ui/form";
+import { IProjectId } from "@/core/interfaces/client-and-project-id";
 import {
   concludeProjectSchema,
   TConcludeProjectSchema,
@@ -23,7 +24,7 @@ import { concludeProjectFormOnSubmit } from "@/utils/projects-list-functions/con
 import RatingInput from "./rating-input";
 import ReviewField from "./review-field";
 
-export const ConcludeProjectForm = ({ projectId }: { projectId: string }) => {
+export const ConcludeProjectForm = ({ projectId }: IProjectId) => {
   const queryClient = useQueryClient();
   const { clientId } = useParams<{ clientId: string }>();
   const [isLoading, setIsLoading] = useState<boolean>(false);

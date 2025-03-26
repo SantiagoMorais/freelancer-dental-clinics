@@ -1,14 +1,7 @@
-import { UseFormReturn } from "react-hook-form";
 import { toast } from "sonner";
 
-import { TFormRegisterClientSchema } from "@/core/types/form-register-client-schema";
+import { IProcessZipCode } from "@/core/interfaces/process-zip-code-function";
 import { getAddressByZipCode } from "@/functions/get-address-by-zip-code";
-
-interface IProcessZipCode {
-  zipCode: string;
-  setProcessingZipCode: React.Dispatch<React.SetStateAction<boolean>>;
-  form: UseFormReturn<TFormRegisterClientSchema>;
-}
 
 export const processZipCode = async ({
   setProcessingZipCode,
