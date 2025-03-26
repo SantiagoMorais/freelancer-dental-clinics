@@ -1,14 +1,12 @@
 "use client";
 
 import { useQueryClient } from "@tanstack/react-query";
-import { Loader2 } from "lucide-react";
 import { useParams } from "next/navigation";
 import { useState } from "react";
 import { toast } from "sonner";
 
 import { undoProjectConclusion } from "@/actions/undo-project-conclusion";
-import { Button } from "@/components/ui/button";
-import { DialogClose } from "@/components/ui/dialog";
+import { ConfirmAndCancelButtons } from "@/components/confirm-and-cancel-buttons";
 
 export const UndoProjectConclusion = ({ projectId }: { projectId: string }) => {
   const queryClient = useQueryClient();
@@ -33,20 +31,10 @@ export const UndoProjectConclusion = ({ projectId }: { projectId: string }) => {
   };
 
   return (
-    <div className="flex w-full flex-wrap items-center gap-4">
-      <DialogClose asChild>
-        <Button className="flex-1" variant="secondary">
-          Cancelar
-        </Button>
-      </DialogClose>
-      <Button
-        variant="destructive"
-        disabled={isLoading}
-        onClick={() => handleUndoProjectConclusion()}
-        className="flex-1"
-      >
-        {isLoading ? <Loader2 className="animate-spin" /> : "Confirmar"}
-      </Button>
-    </div>
+    <ConfirmAndCancelButtons
+      onClickFunction={handleUndoProjectConclusion}
+      isLoading={isLoading}
+      colors="secondary"
+    />
   );
 };

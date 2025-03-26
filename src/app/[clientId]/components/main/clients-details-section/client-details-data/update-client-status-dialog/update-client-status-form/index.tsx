@@ -1,16 +1,14 @@
 "use client";
 
 import { WorkingProgress } from "@prisma/client";
-import { DialogClose } from "@radix-ui/react-dialog";
 import { useQueryClient } from "@tanstack/react-query";
-import { Loader2 } from "lucide-react";
 import { useParams } from "next/navigation";
 import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { toast } from "sonner";
 
 import { updateClientStatus } from "@/actions/update-client-status";
-import { Button } from "@/components/ui/button";
+import { ConfirmAndCancelButtons } from "@/components/confirm-and-cancel-buttons";
 import {
   Form,
   FormControl,
@@ -104,21 +102,7 @@ export const UpdateClientStatusForm = ({
             </FormItem>
           )}
         />
-        <div className="flex w-full flex-wrap gap-4">
-          <DialogClose asChild>
-            <Button
-              type="button"
-              disabled={isLoading}
-              variant="destructive"
-              className="flex-1"
-            >
-              Cancelar
-            </Button>
-          </DialogClose>
-          <Button disabled={isLoading} className="flex-1" type="submit">
-            {isLoading ? <Loader2 className="animate-spin" /> : "Atualizar"}
-          </Button>
-        </div>
+        <ConfirmAndCancelButtons isLoading={isLoading} colors="primary" />
       </form>
     </Form>
   );

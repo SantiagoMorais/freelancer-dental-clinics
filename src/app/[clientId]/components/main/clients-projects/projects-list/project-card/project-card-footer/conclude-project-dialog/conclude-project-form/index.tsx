@@ -2,13 +2,11 @@
 
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useQueryClient } from "@tanstack/react-query";
-import { Loader2 } from "lucide-react";
 import { useParams } from "next/navigation";
 import { useState } from "react";
 import { useForm } from "react-hook-form";
 
-import { Button } from "@/components/ui/button";
-import { DialogClose } from "@/components/ui/dialog";
+import { ConfirmAndCancelButtons } from "@/components/confirm-and-cancel-buttons";
 import {
   Form,
   FormField,
@@ -77,16 +75,7 @@ export const ConcludeProjectForm = ({ projectId }: { projectId: string }) => {
             </FormItem>
           )}
         />
-        <div className="flex w-full flex-wrap items-center gap-4">
-          <DialogClose asChild className="flex-1">
-            <Button type="button" variant="destructive" className="flex-1">
-              Cancelar
-            </Button>
-          </DialogClose>
-          <Button type="submit" disabled={isLoading} className="flex-1">
-            {isLoading ? <Loader2 className="animate-spin" /> : "Confirmar"}
-          </Button>
-        </div>
+        <ConfirmAndCancelButtons isLoading={isLoading} colors="primary" />
       </form>
     </Form>
   );
