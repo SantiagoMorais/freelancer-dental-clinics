@@ -12,7 +12,7 @@ Tecnologias utilizadas
 
 ## Sumário
 
-- [Regras de Negócio][#regras-de-negocio]
+- [Regras de Negócio](#regras-de-negocio)
 - [Imagens](#imagens)
 - [Como executar o projeto](#como-executar-o-projeto)
 - [Autor do Projeto](#autor-do-projeto)
